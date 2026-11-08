@@ -1,0 +1,3418 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+<meta name="theme-color" content="#123D2B">
+<title>Cyber Cafe &amp; CSC Service Manager — RIYAJUL DIGITAL SOLUTIONS</title>
+<style>
+/* ============================================================
+   RIYAJUL DIGITAL SOLUTIONS — Design System
+   ============================================================ */
+:root{
+  --green-900:#123D2B; --green-800:#1D5B40; --bg-deep:#0E2119;
+  --gold:#D4AF37; --gold-l:#F2D98A;
+  --white:#FFFFFF; --off:#F7F8F5; --lgreen:#E8F1EA;
+  --text:#25332B; --text2:#778078; --border:#E1E7E1;
+  --danger:#C62828; --success:#218653; --warning:#D98C16;
+  --surface:#FFFFFF; --surface-2:#F7F8F5; --surface-3:#EEF3EE;
+  --shadow:0 2px 10px rgba(18,61,43,.08);
+  --shadow-lg:0 10px 30px rgba(18,61,43,.14);
+  --radius:14px; --radius-sm:9px;
+  --sidebar-w:248px;
+}
+[data-theme="dark"]{
+  --white:#122A1F; --off:#0E2119; --lgreen:#163526;
+  --text:#E6EFE8; --text2:#9BAFA2; --border:#1E3A2C;
+  --surface:#122A1F; --surface-2:#0E2119; --surface-3:#17372A;
+  --shadow:0 2px 12px rgba(0,0,0,.45);
+  --shadow-lg:0 12px 34px rgba(0,0,0,.55);
+  --green-900:#0B2A1D;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:"Segoe UI",system-ui,-apple-system,"Noto Sans Bengali","Nirmala UI",Roboto,Arial,sans-serif;
+  background:var(--surface-2); color:var(--text);
+  font-size:14px; line-height:1.5; -webkit-font-smoothing:antialiased;
+}
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
+button{cursor:pointer;border:none;background:none}
+a{color:var(--green-800);text-decoration:none}
+[data-theme="dark"] a{color:var(--gold-l)}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-thumb{background:#b9c7bd;border-radius:9px}
+[data-theme="dark"] ::-webkit-scrollbar-thumb{background:#28473a}
+
+/* ---------- APP SHELL ---------- */
+.app{display:flex;min-height:100vh}
+/* Sidebar */
+.sidebar{
+  width:var(--sidebar-w); flex:0 0 var(--sidebar-w);
+  background:linear-gradient(180deg,var(--green-900),var(--bg-deep));
+  color:#DCE8E0; display:flex; flex-direction:column;
+  position:sticky; top:0; height:100vh; z-index:60;
+  border-right:1px solid rgba(212,175,55,.16);
+}
+.brand{padding:18px 16px 14px;display:flex;gap:11px;align-items:center;border-bottom:1px solid rgba(212,175,55,.16)}
+.brand-logo{
+  width:42px;height:42px;border-radius:12px;flex:0 0 42px;
+  background:linear-gradient(145deg,var(--gold),#a9861f);
+  display:grid;place-items:center;color:#123D2B;font-weight:900;font-size:15px;
+  box-shadow:0 4px 14px rgba(212,175,55,.35);letter-spacing:-.5px;
+}
+.brand-name{font-size:12.5px;font-weight:800;color:#fff;letter-spacing:.4px;line-height:1.25}
+.brand-sub{font-size:10px;color:var(--gold-l);letter-spacing:.6px;text-transform:uppercase;margin-top:2px}
+.nav{flex:1;overflow-y:auto;padding:10px 10px 18px}
+.nav-group{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:#7fa08f;padding:14px 10px 6px;font-weight:700}
+.nav-item{
+  display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:10px;
+  color:#CBDCD2;font-size:13px;font-weight:500;margin-bottom:2px;width:100%;text-align:left;
+  transition:background .16s,color .16s;
+}
+.nav-item:hover{background:rgba(255,255,255,.07);color:#fff}
+.nav-item.active{background:linear-gradient(90deg,rgba(212,175,55,.24),rgba(212,175,55,.06));color:#fff;font-weight:700;box-shadow:inset 3px 0 0 var(--gold)}
+.nav-item .ico{width:20px;text-align:center;font-size:14px;filter:grayscale(.2)}
+.nav-badge{margin-left:auto;background:var(--gold);color:#123D2B;font-size:10px;font-weight:800;padding:1px 6px;border-radius:20px}
+.sidebar-foot{padding:12px 14px;border-top:1px solid rgba(212,175,55,.16);font-size:10.5px;color:#7fa08f;line-height:1.6}
+.sidebar-foot b{color:var(--gold-l)}
+
+/* Main column */
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.topbar{
+  position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:10px;
+  padding:10px 18px;background:var(--surface);border-bottom:1px solid var(--border);
+  box-shadow:0 1px 0 rgba(18,61,43,.04);
+}
+.hamburger{display:none;font-size:19px;padding:6px 8px;border-radius:8px;background:var(--surface-3)}
+.topbar-title{font-weight:800;font-size:14.5px;letter-spacing:.2px}
+.topbar-title small{display:block;font-weight:500;font-size:11px;color:var(--text2);letter-spacing:.2px}
+.topbar-spacer{flex:1}
+.searchbox{
+  display:flex;align-items:center;gap:7px;background:var(--surface-3);border:1px solid var(--border);
+  border-radius:10px;padding:6px 11px;min-width:250px;max-width:380px;flex:1;
+}
+.searchbox input{border:none;background:none;outline:none;width:100%;font-size:13px}
+.searchbox kbd{font-size:10px;background:var(--surface);border:1px solid var(--border);border-radius:5px;padding:1px 5px;color:var(--text2)}
+.icon-btn{
+  width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-size:15px;
+  background:var(--surface-3);border:1px solid var(--border);transition:.15s;position:relative;
+}
+.icon-btn:hover{background:var(--lgreen);border-color:var(--gold)}
+.icon-btn .dot{position:absolute;top:4px;right:5px;width:7px;height:7px;border-radius:50%;background:var(--danger);border:1.5px solid var(--surface)}
+.btn{
+  display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:9px;
+  background:var(--green-900);color:#fff;font-weight:600;font-size:12.5px;transition:.15s;
+  border:1px solid transparent;white-space:nowrap;
+}
+.btn:hover{background:var(--green-800);transform:translateY(-1px)}
+.btn.gold{background:linear-gradient(145deg,var(--gold),#b8952c);color:#123D2B}
+.btn.gold:hover{filter:brightness(1.07)}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn.ghost:hover{background:var(--surface-3)}
+.btn.danger{background:var(--danger);color:#fff}
+.btn.sm{padding:5px 10px;font-size:11.5px;border-radius:7px}
+.btn.block{width:100%;justify-content:center}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+
+/* Content */
+.view{padding:20px 22px 60px;max-width:1500px;width:100%;margin:0 auto;flex:1}
+.page-head{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;justify-content:space-between;margin-bottom:18px}
+.page-title{font-size:22px;font-weight:800;letter-spacing:-.3px;color:var(--text)}
+.page-sub{font-size:12.5px;color:var(--text2);margin-top:3px;max-width:720px}
+.page-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+/* Cards */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
+.card.pad0{padding:0;overflow:hidden}
+.grid{display:grid;gap:14px}
+.stat-grid{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.stat{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:14px 15px;position:relative;overflow:hidden;box-shadow:var(--shadow);
+}
+.stat::after{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:linear-gradient(180deg,var(--gold),var(--green-800))}
+.stat .lbl{font-size:11px;color:var(--text2);font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.stat .val{font-size:22px;font-weight:800;margin-top:6px;letter-spacing:-.5px}
+.stat .sub{font-size:11px;color:var(--text2);margin-top:3px}
+.stat.green .val{color:var(--success)}
+.stat.red .val{color:var(--danger)}
+.stat.gold .val{color:#b8952c}
+[data-theme="dark"] .stat.gold .val{color:var(--gold-l)}
+
+/* Tables */
+.table-wrap{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:12.8px;min-width:600px}
+thead th{
+  background:var(--surface-3);text-align:left;padding:10px 12px;font-size:10.5px;
+  text-transform:uppercase;letter-spacing:.7px;color:var(--text2);font-weight:800;
+  border-bottom:1px solid var(--border);white-space:nowrap;position:sticky;top:0;
+}
+tbody td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--surface-3)}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.mono{font-variant-numeric:tabular-nums}
+
+/* Badges & chips */
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10.5px;font-weight:800;letter-spacing:.3px;white-space:nowrap}
+.badge.green{background:rgba(33,134,83,.13);color:var(--success)}
+.badge.gold{background:rgba(212,175,55,.18);color:#9a7c1e}
+[data-theme="dark"] .badge.gold{color:var(--gold-l)}
+.badge.red{background:rgba(198,40,40,.12);color:var(--danger)}
+.badge.grey{background:var(--surface-3);color:var(--text2)}
+.badge.blue{background:rgba(29,91,64,.12);color:var(--green-800)}
+[data-theme="dark"] .badge.blue{color:#7fd1a8}
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
+.chip{
+  padding:6px 13px;border-radius:20px;background:var(--surface);border:1px solid var(--border);
+  font-size:12px;font-weight:600;color:var(--text2);transition:.15s;
+}
+.chip:hover{border-color:var(--gold);color:var(--text)}
+.chip.active{background:var(--green-900);color:#fff;border-color:var(--green-900)}
+
+/* Service cards */
+.svc-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(272px,1fr))}
+.svc{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:14px;display:flex;flex-direction:column;gap:9px;transition:.16s;position:relative;overflow:hidden;
+}
+.svc:hover{border-color:var(--gold);box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.svc .no{
+  position:absolute;top:10px;right:12px;font-size:10px;font-weight:800;color:var(--text2);
+  background:var(--surface-3);padding:1px 7px;border-radius:20px;
+}
+.svc .en{font-weight:800;font-size:13.5px;line-height:1.35;padding-right:38px}
+.svc .bn{font-size:12.5px;color:var(--text2);line-height:1.4}
+.svc .cat{font-size:10px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:#9a7c1e}
+[data-theme="dark"] .svc .cat{color:var(--gold-l)}
+.svc .prices{display:flex;gap:8px;flex-wrap:wrap;border-top:1px dashed var(--border);padding-top:9px;margin-top:auto}
+.svc .pbox{flex:1;min-width:80px}
+.svc .pbox .k{font-size:9.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--text2);font-weight:700}
+.svc .pbox .v{font-size:12.5px;font-weight:800;margin-top:1px}
+.svc .actions{display:flex;gap:6px;margin-top:4px}
+.svc .actions .btn{flex:1;justify-content:center}
+
+/* Forms */
+.field{margin-bottom:12px}
+.field label{display:block;font-size:11.5px;font-weight:700;color:var(--text2);margin-bottom:5px;letter-spacing:.2px}
+.field input,.field select,.field textarea{
+  width:100%;padding:9px 11px;border-radius:9px;border:1px solid var(--border);
+  background:var(--surface);outline:none;transition:.15s;font-size:13px;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,55,.15)}
+.field textarea{resize:vertical;min-height:64px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.hint{font-size:11px;color:var(--text2);margin-top:4px;line-height:1.45}
+
+/* Modal */
+#modalRoot{position:fixed;inset:0;z-index:200;display:none}
+#modalRoot.open{display:block}
+.modal-backdrop{position:absolute;inset:0;background:rgba(9,24,17,.62);backdrop-filter:blur(2px);display:flex;align-items:flex-start;justify-content:center;padding:24px 14px;overflow-y:auto}
+.modal{
+  background:var(--surface);border-radius:16px;width:100%;max-width:560px;margin:auto;
+  box-shadow:var(--shadow-lg);border:1px solid var(--border);animation:pop .18s ease;
+}
+.modal.wide{max-width:900px}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+.modal-head{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.modal-head h3{font-size:15px;font-weight:800;flex:1}
+.modal-body{padding:16px 18px;max-height:66vh;overflow-y:auto}
+.modal-foot{padding:13px 18px;border-top:1px solid var(--border);display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
+
+/* Toast */
+#toastRoot{position:fixed;bottom:20px;right:20px;z-index:300;display:flex;flex-direction:column;gap:8px}
+.toast{
+  background:var(--green-900);color:#fff;padding:11px 16px;border-radius:10px;font-size:12.5px;
+  box-shadow:var(--shadow-lg);border-left:4px solid var(--gold);animation:slide .22s ease;max-width:320px;
+}
+.toast.err{border-left-color:var(--danger)}
+.toast.ok{border-left-color:var(--success)}
+@keyframes slide{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
+
+/* Empty state */
+.empty{text-align:center;padding:44px 18px;color:var(--text2)}
+.empty .e-ico{font-size:38px;opacity:.55;margin-bottom:10px}
+.empty h4{font-size:15px;color:var(--text);margin-bottom:5px}
+.empty p{font-size:12.5px;max-width:420px;margin:0 auto 14px}
+
+/* Chart canvases */
+.chart-box{position:relative;height:200px;width:100%}
+.chart-box canvas{width:100%;height:100%;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;font-size:11.5px}
+.legend span{display:flex;align-items:center;gap:5px;color:var(--text2)}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+
+/* Invoice / print area */
+#printArea{display:none}
+@media print{
+  body>*:not(#printArea){display:none !important}
+  #printArea{display:block !important;padding:0;background:#fff;color:#000}
+  .no-print{display:none !important}
+  @page{margin:12mm}
+}
+.doc{font-family:"Segoe UI",system-ui,sans-serif;color:#1b2b22;background:#fff;max-width:820px;margin:0 auto}
+.doc-head{display:flex;justify-content:space-between;gap:18px;border-bottom:3px solid #123D2B;padding-bottom:12px;flex-wrap:wrap}
+.doc-brand{font-size:19px;font-weight:900;color:#123D2B;letter-spacing:.3px}
+.doc-tag{font-size:10.5px;color:#5c6d63;letter-spacing:1px;text-transform:uppercase;margin-top:3px}
+.doc-meta{font-size:11px;color:#4a5a51;text-align:right;line-height:1.65}
+.doc h4{font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:#123D2B;margin:16px 0 7px;border-bottom:1px solid #d8e2da;padding-bottom:4px}
+.doc table{width:100%;border-collapse:collapse;font-size:11.5px;min-width:0}
+.doc th{background:#eef3ee;padding:7px 8px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:#3d5147}
+.doc td{padding:7px 8px;border-bottom:1px solid #e6ece7}
+.doc .tot-row{display:flex;justify-content:space-between;padding:5px 0;font-size:12px}
+.doc .tot-row.grand{border-top:2px solid #123D2B;margin-top:6px;padding-top:8px;font-weight:900;font-size:14.5px;color:#123D2B}
+.doc-foot{margin-top:18px;border-top:1px dashed #c9d6cd;padding-top:10px;font-size:10px;color:#5c6d63;line-height:1.6}
+.doc-note{background:#fbf6e3;border:1px solid #e8dcae;border-radius:7px;padding:8px 10px;font-size:10px;color:#6b5b1d;margin-top:10px;line-height:1.55}
+
+/* Misc */
+.kv{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px dashed var(--border);font-size:12.5px}
+.kv:last-child{border:none}
+.kv .k{color:var(--text2)}
+.kv .v{font-weight:700;text-align:right}
+.section-title{font-size:13px;font-weight:800;letter-spacing:.3px;margin:0 0 10px;display:flex;align-items:center;gap:7px}
+.section-title .bar{width:3px;height:14px;border-radius:2px;background:var(--gold)}
+.muted{color:var(--text2)}
+.tiny{font-size:11px}
+.flex{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.right{margin-left:auto}
+.mt{margin-top:14px}.mb{margin-bottom:14px}
+.divider{height:1px;background:var(--border);margin:14px 0}
+.pill-tabs{display:flex;gap:4px;background:var(--surface-3);padding:4px;border-radius:10px;flex-wrap:wrap}
+.pill-tabs button{padding:6px 13px;border-radius:7px;font-size:12px;font-weight:700;color:var(--text2)}
+.pill-tabs button.active{background:var(--surface);color:var(--green-900);box-shadow:var(--shadow)}
+[data-theme="dark"] .pill-tabs button.active{color:var(--gold-l)}
+.alert{background:rgba(217,140,22,.1);border:1px solid rgba(217,140,22,.4);border-radius:10px;padding:11px 13px;font-size:12px;line-height:1.6}
+.alert.info{background:rgba(29,91,64,.07);border-color:rgba(29,91,64,.28)}
+.alert.danger{background:rgba(198,40,40,.07);border-color:rgba(198,40,40,.3)}
+.footer{margin-top:30px;padding:18px 22px;border-top:1px solid var(--border);text-align:center;font-size:11.5px;color:var(--text2);line-height:1.7}
+.footer b{color:var(--text)}
+
+/* Mobile bottom nav */
+.bottomnav{display:none}
+
+/* Search overlay */
+.search-overlay{position:fixed;inset:0;z-index:250;background:rgba(9,24,17,.6);backdrop-filter:blur(3px);display:none;padding:60px 14px 14px}
+.search-overlay.open{display:block}
+.search-panel{max-width:640px;margin:0 auto;background:var(--surface);border-radius:14px;box-shadow:var(--shadow-lg);overflow:hidden;border:1px solid var(--border)}
+.search-panel input{width:100%;padding:15px 18px;border:none;outline:none;background:transparent;font-size:15px;border-bottom:1px solid var(--border)}
+.search-results{max-height:60vh;overflow-y:auto}
+.sr-item{display:flex;gap:11px;padding:11px 18px;border-bottom:1px solid var(--border);cursor:pointer;align-items:center}
+.sr-item:hover{background:var(--surface-3)}
+.sr-item .t{font-weight:700;font-size:13px}
+.sr-item .s{font-size:11.5px;color:var(--text2)}
+.sr-item .badge{margin-left:auto}
+
+/* Responsive */
+@media(max-width:1080px){
+  .searchbox{min-width:0;max-width:220px}
+}
+@media(max-width:900px){
+  .sidebar{position:fixed;left:0;top:0;bottom:0;transform:translateX(-100%);transition:transform .24s ease;box-shadow:var(--shadow-lg)}
+  .sidebar.open{transform:none}
+  .hamburger{display:grid;place-items:center}
+  .view{padding:14px 13px 90px}
+  .bottomnav{
+    display:flex;position:fixed;bottom:0;left:0;right:0;z-index:55;background:var(--surface);
+    border-top:1px solid var(--border);padding:5px 4px;justify-content:space-around;box-shadow:0 -3px 14px rgba(18,61,43,.09);
+  }
+  .bottomnav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;font-size:9.5px;font-weight:700;color:var(--text2);border-radius:9px}
+  .bottomnav button .ico{font-size:17px}
+  .bottomnav button.active{color:var(--green-800);background:var(--lgreen)}
+  [data-theme="dark"] .bottomnav button.active{color:var(--gold-l)}
+  .page-title{font-size:18px}
+  .stat .val{font-size:19px}
+  .row2,.row3{grid-template-columns:1fr}
+  .topbar{padding:8px 12px}
+  .topbar-title small{display:none}
+  .searchbox{display:none}
+  .topbar .hide-sm{display:none}
+}
+@media(max-width:560px){
+  .svc-grid{grid-template-columns:1fr}
+  .stat-grid{grid-template-columns:1fr 1fr}
+  .modal-body{max-height:72vh}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-logo">RDS</div>
+      <div>
+        <div class="brand-name">RIYAJUL DIGITAL<br>SOLUTIONS</div>
+        <div class="brand-sub">Cyber • CSC • Printing</div>
+      </div>
+    </div>
+    <nav class="nav" id="nav"></nav>
+    <div class="sidebar-foot">
+      <b>Made with ❤️ by Aliriyaj007</b><br>
+      <a href="https://github.com/Aliriyaj007" target="_blank" rel="noopener" style="color:#9fc0ad">github.com/Aliriyaj007</a>
+    </div>
+  </aside>
+
+  <!-- ================= MAIN ================= -->
+  <div class="main">
+    <header class="topbar">
+      <button class="hamburger" data-act="toggleSidebar" aria-label="Menu">☰</button>
+      <div class="topbar-title">
+        <span id="tbTitle">Dashboard</span>
+        <small id="tbSub">Cyber Cafe &amp; CSC Service Manager</small>
+      </div>
+      <div class="topbar-spacer"></div>
+
+      <div class="searchbox" data-act="openSearch">
+        <span>🔍</span>
+        <input id="topSearch" placeholder="Search services, customers, bills…" readonly>
+        <kbd>/</kbd>
+      </div>
+
+      <button class="icon-btn hide-sm" data-act="quickCustomer" title="Quick Add Customer">👤</button>
+      <button class="btn gold hide-sm" data-act="newBill">＋ New Bill</button>
+      <button class="icon-btn" data-act="openNotifications" title="Notifications">🔔<span class="dot" id="notifDot" style="display:none"></span></button>
+      <button class="icon-btn" data-act="toggleLang" id="langBtn" title="Language">ব</button>
+      <button class="icon-btn" data-act="toggleTheme" id="themeBtn" title="Theme">🌙</button>
+      <button class="icon-btn" data-act="go" data-route="settings" title="Settings">⚙️</button>
+    </header>
+
+    <main class="view" id="view"></main>
+
+    <div class="footer">
+      <b>RIYAJUL DIGITAL SOLUTIONS</b> — Your Trusted Digital Service &amp; Printing Centre.<br>
+      Cyber Cafe &amp; CSC Service Manager · Made with ❤️ by
+      <a href="https://github.com/Aliriyaj007" target="_blank" rel="noopener">Aliriyaj007</a>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom nav (mobile) -->
+<nav class="bottomnav" id="bottomnav"></nav>
+
+<!-- Modal root -->
+<div id="modalRoot"></div>
+<!-- Toast root -->
+<div id="toastRoot"></div>
+<!-- Global search overlay -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-panel">
+    <input id="gsInput" placeholder="Search services (English/Bengali), customers, bills, applications…">
+    <div class="search-results" id="gsResults"></div>
+  </div>
+</div>
+<!-- Print area -->
+<div id="printArea"></div>
+
+<script>
+/* ============================================================================
+   RIYAJUL DIGITAL SOLUTIONS — Cyber Cafe & CSC Service Manager
+   Single-file offline business management application.
+   All data is stored locally in the browser (localStorage).
+   ============================================================================ */
+(function(){
+"use strict";
+
+/* ==========================================================================
+   0. CONFIG & HELPERS
+   ========================================================================== */
+const CFG = {
+  storageKey: 'rds_cybercafe_db_v1',
+  business: 'RIYAJUL DIGITAL SOLUTIONS',
+  tagline: 'Cyber Cafe • CSC Services • Xerox • Printing • Studio',
+  dev: 'Aliriyaj007',
+  devUrl: 'https://github.com/Aliriyaj007',
+  disclaimer: 'This application is an independent business management tool. It is NOT an official government website, government portal, UIDAI application, banking application or authorised payment gateway.'
+};
+
+const $  = (s,r)=> (r||document).querySelector(s);
+const $$ = (s,r)=> Array.from((r||document).querySelectorAll(s));
+const esc = s => String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const nid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,7);
+const todayISO = () => new Date().toISOString().slice(0,10);
+const nowISO = () => new Date().toISOString();
+const round2 = n => Math.round((Number(n)||0)*100)/100;
+
+function money(n){
+  const v = round2(n||0);
+  return '₹' + v.toLocaleString('en-IN',{minimumFractionDigits: (v%1?2:0), maximumFractionDigits:2});
+}
+function num(n){ return (Number(n)||0).toLocaleString('en-IN'); }
+function dt(iso){
+  if(!iso) return '—';
+  const d = new Date(iso);
+  if(isNaN(d)) return '—';
+  return d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
+}
+function dtTime(iso){
+  if(!iso) return '—';
+  const d = new Date(iso);
+  if(isNaN(d)) return '—';
+  return d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}) + ', ' +
+         d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+}
+function firstNum(s){
+  const str = String(s||'');
+  if(!/₹/.test(str)) return 0;
+  const m = str.replace(/,/g,'').match(/\d+(\.\d+)?/);
+  return m ? parseFloat(m[0]) : 0;
+}
+function isVariableFee(s){ return !/₹/.test(String(s||'')) && !/^0$/.test(String(s||'').trim()); }
+
+function toast(msg, type){
+  const t = document.createElement('div');
+  t.className = 'toast ' + (type||'');
+  t.textContent = msg;
+  $('#toastRoot').appendChild(t);
+  setTimeout(()=>{ t.style.opacity='0'; t.style.transform='translateX(30px)'; t.style.transition='.25s'; }, 2600);
+  setTimeout(()=> t.remove(), 3000);
+}
+
+/* ==========================================================================
+   1. SERVICE DATASET  (124 services — original numbering preserved)
+   Format: [num, english, bengali, govFeeDisplay, shopMin, shopMax, unit]
+   ========================================================================== */
+const RAW_SERVICES = [
+/* --- 1-15 Identity & Government Cards --- */
+[1,'Aadhaar New Enrollment','নতুন আধার নথিভুক্তকরণ','₹0 (Free)',0,30,'per application'],
+[2,'Aadhaar Mandatory Biometric Update (Age 5/15)','আধার বায়োমেট্রিক আপডেট','₹0 (Free)',30,50,'per application'],
+[3,'Aadhaar Demographic Update (Address/Mobile/DOB)','আধার তথ্য সংশোধন','₹50',70,100,'per application'],
+[4,'Aadhaar Document Update (eKYC)','আধার নথি আপডেট','₹0 – ₹50',30,60,'per application'],
+[5,'Aadhaar PVC Card Order','আধার পিভিসি কার্ড অর্ডার','₹50',80,100,'per card'],
+[6,'Aadhaar Download & Printout','আধার ডাউনলোড ও প্রিন্ট','₹0',20,30,'per copy'],
+[7,'New PAN Card Application (Form 49A)','নতুন প্যান কার্ড আবেদন','₹107',150,200,'per application'],
+[8,'PAN Card Correction / Update','প্যান কার্ড সংশোধন','₹107',150,200,'per application'],
+[9,'Instant e-PAN Card Application','তাৎক্ষণিক ই-প্যান','₹0',50,100,'per application'],
+[10,'PAN-Aadhaar Linking','প্যান-আধার লিঙ্ক','₹1,000 (Fine)',1050,1100,'per application'],
+[11,'New Voter ID Registration (Form 6)','নতুন ভোটার কার্ড আবেদন','₹0',50,80,'per application'],
+[12,'Voter ID Correction / Shifting (Form 8)','ভোটার কার্ড সংশোধন','₹0',50,80,'per application'],
+[13,'e-EPIC (Voter Card) Download & PVC Print','ডিজিটাল ভোটার কার্ড প্রিন্ট','₹0',40,60,'per card'],
+[14,'Aadhaar-Voter Linking (Form 6B)','আধার-ভোটার লিঙ্ক','₹0',30,50,'per application'],
+[15,'Overseas / NRI Voter Application','প্রবাসী ভোটার আবেদন','₹0',80,100,'per application'],
+/* --- 16-25 Ration Card --- */
+[16,'New Ration Card Application (Form 3/4)','নতুন রেশন কার্ড আবেদন','₹0',50,80,'per application'],
+[17,'Ration Card Member Addition (Form 4)','নতুন সদস্য যোগ করা','₹0',40,60,'per application'],
+[18,'Ration Card Member Deletion / Split (Form 7)','সদস্য নাম বাদ / ফ্যামিলি স্প্লিট','₹0',40,60,'per application'],
+[19,'Ration Card Name/DOB/Address Correction (Form 5)','রেশন কার্ড সংশোধন','₹0',50,70,'per application'],
+[20,'Ration Card Category Change (Form 8)','রেশন ক্যাটাগরি পরিবর্তন','₹0',50,80,'per application'],
+[21,'Ration Card e-KYC (Aadhaar Seeding)','রেশন কার্ড ই-কেওয়াইসি','₹0',30,50,'per application'],
+[22,'Ration Card Duplicate / Replacement Request','ডুপ্লিকেট রেশন কার্ড','₹0',40,60,'per application'],
+[23,'Ration Card Surrender / Transfer (Form 6/9)','কার্ড সারেন্ডার / ট্রান্সফার','₹0',50,70,'per application'],
+[24,'Digital Ration Card Download & PVC Print','ডিজিটাল রেশন কার্ড প্রিন্ট','₹0',30,50,'per card'],
+[25,'FPS (Dealer) Change Application (Form 10)','রেশন ডিলার পরিবর্তন','₹0',40,60,'per application'],
+/* --- 26-38 WB Schemes & Certificates --- */
+[26,'Lakshmir Bhandar Registration / Status Check','লক্ষ্মীর ভান্ডার স্ট্যাটাস','₹0',30,50,'per application'],
+[27,'Caste Certificate (SC/ST/OBC) Online Application','জাতিগত শংসাপত্র','₹0 – ₹30',80,150,'per application'],
+[28,'Income Certificate (e-District WB)','আয় সংক্রান্ত শংসাপত্র','₹0 – ₹30',60,80,'per application'],
+[29,'Domicile / Residential Certificate','বাসস্থানের শংসাপত্র','₹0 – ₹30',60,80,'per application'],
+[30,'Ordinary Resident Certificate','স্থানীয় বাসিন্দা প্রমাণপত্র','₹0 – ₹30',50,80,'per application'],
+[31,'Birth Certificate Application / Download','জন্ম নিবন্ধন শংসাপত্র','₹0 – ₹30',50,100,'per application'],
+[32,'Death Certificate Application / Download','মৃত্যু নিবন্ধন শংসাপত্র','₹0 – ₹30',50,100,'per application'],
+[33,'Distance Certificate for Schools/Colleges','দূরত্ব সম্পর্কিত প্রমাণপত্র','₹20 – ₹30',50,70,'per application'],
+[34,'Swasthya Sathi Card Status / Member Update','স্বাস্থ্য সাথী কার্ড পরিষেবা','₹0',40,60,'per application'],
+[35,'Khabar Khas / Khas Jami Mutation Application','মিউটেশন আবেদন','Portal Fee Actual',100,200,'per application'],
+[36,'Banglarbhumi Khatian & Porcha (RoR) Search/Download','খতিয়ান ও পরচা প্রিন্ট','₹20 per page',50,80,'per page'],
+[37,'Character Certificate (WB Police Portal)','চারিত্রিক শংসাপত্র','₹0',80,120,'per application'],
+[38,'Unemployment Senior Certificate / Employment Exchange Registration','বেকারত্ব বা কর্মসংস্থান রেজিস্ট্রেশন','₹0',80,100,'per application'],
+/* --- 39-52 Healthcare & Central Welfare --- */
+[39,'Ayushman Bharat Health Card (PM-JAY)','আয়ুষ্মান কার্ড','₹0',30,50,'per card'],
+[40,'ABHA Card (Ayushman Bharat Health Account)','আভা ডিজিটাল হেলথ কার্ড','₹0',30,50,'per card'],
+[41,'e-Shram Card Registration & Updates','ই-শ্রম কার্ড','₹0',40,60,'per application'],
+[42,'e-Shram Card PVC Print','ই-শ্রম পিভিসি প্রিন্ট','₹0',50,80,'per card'],
+[43,'Widow Pension Scheme','বিধবা ভাতা','₹0',50,80,'per application'],
+[44,'Old Age / Disability Pension Application','বার্ধক্য / প্রতিবন্ধী ভাতা','₹0',50,80,'per application'],
+[45,'UDID Card (Disability ID) Registration','প্রতিবন্ধী ইউডিআইডি কার্ড','₹0',50,80,'per application'],
+[46,'PM-Kisan Farmer Registration & Status Check','পিএম কিসান আবেদন','₹0',50,80,'per application'],
+[47,'PM-Kisan Biometric e-KYC','পিএম কিসান বায়োমেট্রিক কেওয়াইসি','₹15',40,60,'per application'],
+[48,'PM Vishwakarma Scheme Registration','পিএম বিশ্বকর্মা যোজনা','₹0',50,100,'per application'],
+[49,'PM Surya Ghar Free Electricity Survey/Apply','পিএম সূর্য ঘর যোজনা','₹0',50,100,'per application'],
+[50,'PM Shram Yogi Maandhan Pension Scheme','পিএম শ্রমযোগী মানধন','₹0',50,80,'per application'],
+[51,'Atal Pension Yojana (APY) Form Submission','অটল পেনশন যোজনা','₹0',40,60,'per application'],
+[52,'Jeevan Pramaan (Life Certificate for Pensioners)','ডিজিটাল জীবন প্রমাণপত্র','₹0',50,80,'per application'],
+/* --- 53-62 Banking & Financial --- */
+[53,'Aadhaar Cash Withdrawal (AEPS)','আধার দিয়ে টাকা তোলা','Free for Customer',0,0,'per transaction'],
+[54,'Aadhaar Balance Enquiry / Mini Statement','ব্যালেন্স চেক ও স্টেটমেন্ট','Free for Customer',0,10,'per transaction'],
+[55,'Domestic Money Transfer (DMT/IMPS)','টাকা পাঠানো','Bank Fee (1%)',10,20,'per ₹1000'],
+[56,'New Bank Account Opening Assistance (BSBD/Savings)','নতুন ব্যাংক অ্যাকাউন্ট','₹0',50,100,'per application'],
+[57,'DBT (Direct Benefit Transfer) Status & Link Check','ডিবিটি স্ট্যাটাস চেক','₹0',20,30,'per transaction'],
+[58,'NPCI Aadhaar-Bank Seeding Verification','ব্যাংক-আধার সিডিং চেক','₹0',20,30,'per transaction'],
+[59,'CIBIL / Credit Score Check','সিবিল স্কোর চেক','₹0',50,80,'per transaction'],
+[60,'PF / EPFO Balance Check & Passbook Download','পিএফ ব্যালেন্স চেক','₹0',30,50,'per transaction'],
+[61,'EPFO Online Claim & Pension Withdrawal','পিএফ টাকা তোলার আবেদন','₹0',100,200,'per application'],
+[62,'EPFO e-KYC & UAN Activation','ইউএএন অ্যাক্টিভেশন ও কেওয়াইসি','₹0',50,80,'per application'],
+/* --- 63-74 Education & Exams --- */
+[63,'Aikyashree / OASIS / SVMCM Scholarship Form','স্কলারশিপ ফর্ম ফিলআপ','₹0',60,100,'per application'],
+[64,'National Scholarship Portal (NSP) Application','জাতীয় স্কলারশিপ','₹0',60,100,'per application'],
+[65,'WBBSE / WBCHSE Board Exam Registration Assistance','বোর্ড পরীক্ষার রেজিস্ট্রেশন','Portal Fee Actual',50,80,'per application'],
+[66,'College Online Admission Form Fill-up','কলেজ ভর্তি ফর্ম','College Fee Actual',80,150,'per application'],
+[67,'Admit Card Download & Printout','এডমিট কার্ড ডাউনলোড','₹0',20,30,'per copy'],
+[68,'WB Police / KP Constable/SI Job Form Fill-up','পুলিশ চাকরির আবেদন','Exam Fee Actual',60,100,'per application'],
+[69,'WB PSC / WB SSC Online Form Submission','সরকারি চাকরির আবেদন','Exam Fee Actual',60,100,'per application'],
+[70,'Railway (RRB/RRC) Job Application','রেলওয়ে ফর্ম পূরণ','Exam Fee Actual',60,100,'per application'],
+[71,'Staff Selection Commission (SSC) Registration','এসএসসি আবেদন','Exam Fee Actual',60,100,'per application'],
+[72,'UPSC / Central Govt Job Application','ইউপিএসসি চাকরির ফর্ম','Exam Fee Actual',100,150,'per application'],
+[73,'NIOS / IGNOU Admission & Exam Form Submission','ইগনু / মুক্ত বিশ্ববিদ্যালয়','Portal Fee Actual',100,200,'per application'],
+[74,'Resume / Biodata Creation & Formatting','বায়োডাটা / রেজুমে তৈরি','₹0',50,100,'per document'],
+/* --- 75-86 Transport & Utilities --- */
+[75,'Learner\'s Driving Licence Application','লার্নার ড্রাইভিং লাইসেন্স','₹150 – ₹500',100,150,'per application'],
+[76,'Permanent Driving Licence Slot Booking','স্থায়ী ড্রাইভিং লাইসেন্স বুকিং','Slot Fee Actual',100,150,'per application'],
+[77,'Driving Licence Renewal / Duplicate Application','লাইসেন্স রিনিউ','Official Fee',150,200,'per application'],
+[78,'Parivahan Traffic E-Challan Payment','ট্রাফিক চালান পরিশোধ','Challan Amount',30,50,'per transaction'],
+[79,'Vehicle RC Transfer / NOC Application','গাড়ির আরসি ট্রান্সফার','Official Fee',150,250,'per application'],
+[80,'New FASTag Buying & Registration','নতুন ফাস্ট্যাগ কেনা','₹100 – ₹200',50,100,'per card'],
+[81,'FASTag KYC Update & Wallet Recharge','ফাস্ট্যাগ কেওয়াইসি','₹0',30,50,'per transaction'],
+[82,'Passport Online Registration & Appointment Slot','পাসপোর্ট আবেদন','₹1,500',200,300,'per application'],
+[83,'WBSEDCL Electricity Bill Payment','বিদ্যুৎ বিল পরিশোধ','Bill Amount',15,20,'per transaction'],
+[84,'WBSEDCL New Electric Connection Application','নতুন কারেন্ট সংযোগ','Official Fee',100,150,'per application'],
+[85,'LPG Cylinder Booking (Indane/HP/Bharat)','গ্যাস সিলিন্ডার বুকিং','Gas Cost',20,30,'per booking'],
+[86,'LPG Gas Customer e-KYC Update','গ্যাস সংযোগের ই-কেওয়াইসি','₹0',30,50,'per application'],
+/* --- 87-94 Business & Legal --- */
+[87,'MSME / Udyam Aadhar Registration','উদ্যম রেজিস্ট্রেশন','₹0 (Free)',100,200,'per application'],
+[88,'Trade Licence Online Application (Panchayat/Municipality)','ট্রেড লাইসেন্স','Government Fee',100,200,'per application'],
+[89,'FSSAI Food License Registration (Basic)','খাদ্য সুরক্ষা লাইসেন্স','₹100 / year',100,150,'per application'],
+[90,'GST Registration (New)','জিএসটি রেজিস্ট্রেশন','₹0',300,500,'per application'],
+[91,'GST Monthly / Quarterly Return Filing (Nil Return)','জিএসটি রিটার্ন ফাইলিং','₹0',100,200,'per filing'],
+[92,'Digital Signature Certificate (DSC) Creation','ডিজিটাল স্বাক্ষর','Vendor Fee',250,400,'per certificate'],
+[93,'E-Stamping & Affidavit Typing','স্ট্যাম্প পেপার টাইপিং','Stamp Duty Actual',50,100,'per document'],
+[94,'Commercial / Personal Income Tax Return (ITR) Filing','আয়কর রিটার্ন ফাইলিং','₹0',200,500,'per filing'],
+/* --- 95-99 Travel & Ticketing --- */
+[95,'IRCTC Train Ticket Booking (General)','ট্রেন টিকিট বুকিং','Ticket Fare',20,40,'per ticket'],
+[96,'IRCTC Tatkal Train Ticket Booking','তৎকাল টিকিট বুকিং','Ticket Fare',50,100,'per ticket'],
+[97,'State / Private Bus Ticket Booking','বাস টিকিট বুকিং','Ticket Fare',20,40,'per ticket'],
+[98,'Flight Ticket Booking','বিমান টিকিট বুকিং','Ticket Fare',100,200,'per ticket'],
+[99,'Hotel / Lodge Room Booking','হোটেল বুকিং','Room Cost',50,100,'per booking'],
+/* --- 100-110 General Printing & Document Processing --- */
+[100,'Black & White Photocopy (A4 Single/Double Side)','জেরক্স','—',2,3,'per page'],
+[101,'Black & White Document Printout','ব্ল্যাক অ্যান্ড হোয়াইট প্রিন্ট','—',5,5,'per page'],
+[102,'Color Document Printout (A4)','রঙিন প্রিন্ট','—',10,15,'per page'],
+[103,'Passport Size Photo Printing (Set of 8)','পাসপোর্ট ফটো','—',40,60,'per set'],
+[104,'Document Scanning & Email/WhatsApp Sending','স্ক্যান ও মেল','—',10,20,'per document'],
+[105,'A4 Page Lamination','লেমিনেশন','—',20,30,'per page'],
+[106,'PVC Card Custom Plastic Printing','পিভিসি প্লাস্টিক কার্ড প্রিন্ট','—',50,80,'per card'],
+[107,'Document Spiral / Comb Binding','স্পাইরাল বাইন্ডিং','—',30,50,'per copy'],
+[108,'English / Bengali Document DTP Typing','টাইপিং পরিষেবা','—',20,30,'per page'],
+[109,'Image Resizing / MB to KB Conversion for Online Forms','ছবি রিসাইজ ও কনভার্শন','—',20,30,'per file'],
+[110,'PDF File Merging, Splitting & Formatting','পিডিএফ কাজ','—',20,30,'per file'],
+/* --- 111-124 Other Printing & Photo Studio --- */
+[111,'Standard Lamination (A4 / Legal / Aadhaar Size)','সাধারণ লেমিনেশন','—',10,30,'per page'],
+[112,'Oversized / Special Lamination (A3 Size)','বড় সাইজ লেমিনেশন','—',40,60,'per page'],
+[113,'Small Card Lamination / Pocket Size','ছোট কার্ড লেমিনেশন','—',10,15,'per card'],
+[114,'4×6 Glossy Photo Printing (Coloured)','৪×৬ গ্লসি ফটো প্রিন্ট','—',15,25,'per print'],
+[115,'A4 Size Coloured Glossy / Photo Paper Printing','এ-ফোর গ্লসি ফটো প্রিন্ট','—',30,50,'per page'],
+[116,'Passport Size / Stamp Size Photo Set','পাসপোর্ট সাইজ ছবি প্রিন্ট','—',40,60,'per set'],
+[117,'Glossy / Matte Paper Document Printing','গ্লসি পেপার ডকুমেন্ট প্রিন্ট','—',20,40,'per page'],
+[118,'Heavyweight Cardstock / Art Paper Printing','আর্ট পেপার বা কার্ডস্টক প্রিন্ট','—',15,30,'per sheet'],
+[119,'Spiral / Comb Binding','স্পাইরাল বাইন্ডিং','—',30,60,'per copy'],
+[120,'Hardbound Binding','হার্ডবাউন্ড বাইন্ডিং','—',100,200,'per copy'],
+[121,'Document Scanning & PDF Conversion','ডকুমেন্ট স্ক্যানিং','—',10,20,'per document'],
+[122,'File Merging, Splitting & Compression','পিডিএফ ফাইল এডিটিং','—',20,30,'per file'],
+[123,'English, Bengali & DTP Typing','ডিটিপি টাইপিং কাজ','—',20,30,'per page'],
+[124,'Sticker / Label Sheet Printing','স্টিকার পেপার প্রিন্ট','—',30,50,'per sheet']
+];
+
+const CATEGORIES = {
+  identity : {name:'Identity & Government Cards', bn:'পরিচয়পত্র ও সরকারি কার্ড', icon:'🪪', type:'gov'},
+  ration   : {name:'WB Ration Card Services',     bn:'রেশন কার্ড পরিষেবা',      icon:'🍚', type:'gov'},
+  wb       : {name:'WB Schemes & Certificates',   bn:'সরকারি প্রকল্প ও শংসাপত্র', icon:'🏛️', type:'gov'},
+  health   : {name:'Healthcare & Social Welfare', bn:'স্বাস্থ্য ও জনকল্যাণ',     icon:'🏥', type:'gov'},
+  banking  : {name:'Banking, AEPS & Financial',   bn:'ব্যাংকিং ও আর্থিক',        icon:'🏦', type:'fin'},
+  edu      : {name:'Education, Exams & Jobs',     bn:'শিক্ষা ও চাকরির পরীক্ষা',  icon:'🎓', type:'gov'},
+  transport: {name:'Transport, Parivahan & Utilities', bn:'পরিবহন ও ইউটিলিটি',  icon:'🚗', type:'gov'},
+  business : {name:'Business, Legal & Commercial',bn:'ব্যবসা ও আইনি পরিষেবা',    icon:'💼', type:'gov'},
+  travel   : {name:'Travel & Ticketing',          bn:'ভ্রমণ ও টিকিট বুকিং',      icon:'🎫', type:'tick'},
+  printing : {name:'General Printing & Documents',bn:'সাধারণ প্রিন্টিং ও ডিজিটাল কাজ', icon:'🖨️', type:'print'},
+  otherprint:{name:'Other Printing & Photo Studio',bn:'অন্যান্য প্রিন্টিং ও স্টুডিও', icon:'📸', type:'print'}
+};
+
+function catOf(num){
+  if(num<=15) return 'identity';
+  if(num<=25) return 'ration';
+  if(num<=38) return 'wb';
+  if(num<=52) return 'health';
+  if(num<=62) return 'banking';
+  if(num<=74) return 'edu';
+  if(num<=86) return 'transport';
+  if(num<=94) return 'business';
+  if(num<=99) return 'travel';
+  if(num<=110) return 'printing';
+  return 'otherprint';
+}
+
+/* ==========================================================================
+   2. STORAGE
+   ========================================================================== */
+const Store = {
+  db: null,
+  defaults(){
+    return {
+      version: 1,
+      settings: {
+        business: {
+          name:'RIYAJUL DIGITAL SOLUTIONS',
+          address:'',
+          phone:'',
+          email:'',
+          footer:'Thank you for choosing RIYAJUL DIGITAL SOLUTIONS.'
+        },
+        invoice: { prefix:'RDS', next:1 },
+        lang: 'en',
+        theme: 'light',
+        defaults: { shopCharge:30, discount:0, payment:'Cash' },
+        compact:false
+      },
+      overrides: {},
+      customers: [],
+      applications: [],
+      invoices: [],
+      expenses: [],
+      incomes: [],
+      inventory: [],
+      dismissed: []
+    };
+  },
+  load(){
+    try {
+      const raw = localStorage.getItem(CFG.storageKey);
+      this.db = raw ? JSON.parse(raw) : this.defaults();
+      // merge missing keys
+      const d = this.defaults();
+      this.db.settings = Object.assign({}, d.settings, this.db.settings||{});
+      this.db.settings.business = Object.assign({}, d.settings.business, this.db.settings.business||{});
+      this.db.settings.invoice  = Object.assign({}, d.settings.invoice,  this.db.settings.invoice||{});
+      this.db.settings.defaults = Object.assign({}, d.settings.defaults, this.db.settings.defaults||{});
+      ['customers','applications','invoices','expenses','incomes','inventory','dismissed'].forEach(k=>{
+        if(!Array.isArray(this.db[k])) this.db[k]=[];
+      });
+      if(!this.db.overrides) this.db.overrides = {};
+    } catch(e){
+      console.error('Load failed', e);
+      this.db = this.defaults();
+    }
+  },
+  save(){
+    try { localStorage.setItem(CFG.storageKey, JSON.stringify(this.db)); }
+    catch(e){ toast('Storage full or unavailable — export a backup!', 'err'); }
+  },
+  reset(){ this.db = this.defaults(); this.save(); }
+};
+
+/* ==========================================================================
+   3. SERVICE MODULE
+   ========================================================================== */
+const Services = {
+  all: [],
+  build(){
+    this.all = RAW_SERVICES.map(r=>{
+      const [num,en,bn,gov,min,max,unit] = r;
+      const ov = Store.db.overrides[num] || {};
+      const s = {
+        num, en, bn, gov, unit,
+        cat: catOf(num),
+        shopMin: min, shopMax: max,
+        shopStd: Math.round((min+max)/2),
+        active: true,
+        notes: ''
+      };
+      Object.assign(s, ov);
+      s.govNum = firstNum(s.gov);
+      s.govVar = isVariableFee(s.gov);
+      return s;
+    });
+  },
+  get(num){ return this.all.find(s=>s.num===Number(num)); },
+  save(num, patch){
+    Store.db.overrides[num] = Object.assign({}, Store.db.overrides[num]||{}, patch);
+    Store.save();
+    this.build();
+  },
+  list(){ return this.all; },
+  active(){ return this.all.filter(s=>s.active); },
+  isPrinting(s){ return CATEGORIES[s.cat] && CATEGORIES[s.cat].type==='print'; },
+  search(q){
+    q = String(q||'').trim().toLowerCase();
+    if(!q) return this.all;
+    return this.all.filter(s=>
+      s.en.toLowerCase().includes(q) ||
+      s.bn.includes(q) ||
+      String(s.num)===q ||
+      (CATEGORIES[s.cat].name.toLowerCase().includes(q)) ||
+      (CATEGORIES[s.cat].bn.includes(q)) ||
+      s.gov.toLowerCase().includes(q) ||
+      s.unit.toLowerCase().includes(q)
+    );
+  }
+};
+
+/* ==========================================================================
+   4. I18N (UI labels)
+   ========================================================================== */
+const I18N = {
+  en: {
+    dashboard:'Dashboard', catalogue:'Service Catalogue', gov:'Government Services',
+    printing:'Printing & Xerox', photo:'Photo Studio', documents:'Document Processing',
+    customers:'Customer Management', applications:'Application Tracking', billing:'Billing & Invoices',
+    finance:'Income & Expenses', inventory:'Inventory', reports:'Reports & Analytics',
+    pricelist:'Price List', settings:'Settings', guide:'User Guide', about:'About',
+    newBill:'New Bill', addCustomer:'Add Customer', search:'Search', save:'Save', cancel:'Cancel',
+    delete:'Delete', edit:'Edit', print:'Print', close:'Close', total:'Total', today:'Today',
+    allServices:'All Services', addToBill:'Add to Bill', viewDetails:'View Details'
+  },
+  bn: {
+    dashboard:'ড্যাশবোর্ড', catalogue:'পরিষেবা তালিকা', gov:'সরকারি পরিষেবা',
+    printing:'প্রিন্টিং ও জেরক্স', photo:'ফটো স্টুডিও', documents:'ডকুমেন্ট প্রসেসিং',
+    customers:'গ্রাহক ব্যবস্থাপনা', applications:'আবেদন ট্র্যাকিং', billing:'বিলিং ও ইনভয়েস',
+    finance:'আয় ও ব্যয়', inventory:'স্টক', reports:'রিপোর্ট ও বিশ্লেষণ',
+    pricelist:'মূল্য তালিকা', settings:'সেটিংস', guide:'ব্যবহার নির্দেশিকা', about:'পরিচিতি',
+    newBill:'নতুন বিল', addCustomer:'গ্রাহক যোগ', search:'খুঁজুন', save:'সংরক্ষণ', cancel:'বাতিল',
+    delete:'মুছুন', edit:'সম্পাদনা', print:'প্রিন্ট', close:'বন্ধ', total:'মোট', today:'আজ',
+    allServices:'সব পরিষেবা', addToBill:'বিলে যোগ করুন', viewDetails:'বিস্তারিত'
+  }
+};
+function t(k){
+  const lang = Store.db.settings.lang || 'en';
+  return (I18N[lang] && I18N[lang][k]) || I18N.en[k] || k;
+}
+function lang(){ return Store.db.settings.lang || 'en'; }
+function isBn(){ return lang()==='bn'; }
+
+/* ==========================================================================
+   5. CHARTS (canvas, dependency-free)
+   ========================================================================== */
+const Chart = {
+  _prep(cv){
+    const dpr = window.devicePixelRatio || 1;
+    const w = cv.clientWidth || 300, h = cv.clientHeight || 180;
+    cv.width = w*dpr; cv.height = h*dpr;
+    const ctx = cv.getContext('2d');
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,w,h);
+    return {ctx,w,h};
+  },
+  css(v){ return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); },
+  bar(cv, data, opts){
+    if(!cv) return;
+    const {ctx,w,h} = this._prep(cv);
+    const grid = this.css('--border'), txt = this.css('--text2');
+    const padL=44, padR=10, padT=12, padB=26;
+    const cw = w-padL-padR, ch = h-padT-padB;
+    const max = Math.max(1, ...data.map(d=>d.value));
+    ctx.strokeStyle = grid; ctx.lineWidth=1; ctx.font='10px sans-serif'; ctx.fillStyle=txt;
+    for(let i=0;i<=4;i++){
+      const y = padT + ch - (ch*i/4);
+      ctx.beginPath(); ctx.moveTo(padL,y); ctx.lineTo(w-padR,y); ctx.stroke();
+      ctx.fillText('₹'+Math.round(max*i/4), 3, y+3);
+    }
+    const bw = cw / Math.max(1,data.length);
+    data.forEach((d,i)=>{
+      const bh = (d.value/max)*ch;
+      const x = padL + i*bw + bw*0.18;
+      const y = padT + ch - bh;
+      const g = ctx.createLinearGradient(0,y,0,padT+ch);
+      g.addColorStop(0, opts && opts.color ? opts.color : '#D4AF37');
+      g.addColorStop(1, '#1D5B40');
+      ctx.fillStyle = g;
+      const bwid = Math.max(3, bw*0.64);
+      const r = Math.min(5, bwid/2);
+      ctx.beginPath();
+      ctx.moveTo(x, y+bh); ctx.lineTo(x, y+r);
+      ctx.quadraticCurveTo(x, y, x+r, y);
+      ctx.lineTo(x+bwid-r, y); ctx.quadraticCurveTo(x+bwid, y, x+bwid, y+r);
+      ctx.lineTo(x+bwid, y+bh); ctx.closePath(); ctx.fill();
+      ctx.fillStyle = txt; ctx.font='9.5px sans-serif'; ctx.textAlign='center';
+      if(data.length<=14) ctx.fillText(d.label, x+bwid/2, h-8);
+      ctx.textAlign='left';
+    });
+  },
+  doughnut(cv, data){
+    if(!cv) return;
+    const {ctx,w,h} = this._prep(cv);
+    const colors = ['#D4AF37','#1D5B40','#218653','#F2D98A','#778078','#C62828','#D98C16','#123D2B','#8fbfa3','#b8952c'];
+    const total = data.reduce((a,b)=>a+b.value,0);
+    const cx = w/2, cy = h/2, R = Math.min(w,h)/2 - 8, r = R*0.6;
+    if(total<=0){
+      ctx.strokeStyle = this.css('--border'); ctx.lineWidth = R-r;
+      ctx.beginPath(); ctx.arc(cx,cy,(R+r)/2,0,Math.PI*2); ctx.stroke();
+      return;
+    }
+    let ang = -Math.PI/2;
+    data.forEach((d,i)=>{
+      const a = (d.value/total)*Math.PI*2;
+      ctx.beginPath(); ctx.moveTo(cx,cy);
+      ctx.arc(cx,cy,R,ang,ang+a); ctx.closePath();
+      ctx.fillStyle = colors[i%colors.length]; ctx.fill();
+      ang += a;
+    });
+    ctx.globalCompositeOperation='destination-out';
+    ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.fill();
+    ctx.globalCompositeOperation='source-over';
+    ctx.fillStyle = this.css('--text'); ctx.font='bold 14px sans-serif';
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText(money(total), cx, cy);
+    ctx.textAlign='left'; ctx.textBaseline='alphabetic';
+  }
+};
+
+/* ==========================================================================
+   6. UI HELPERS
+   ========================================================================== */
+function openModal(title, body, opts){
+  opts = opts || {};
+  const root = $('#modalRoot');
+  root.innerHTML = `
+    <div class="modal-backdrop" data-act="closeModal">
+      <div class="modal ${opts.wide?'wide':''}">
+        <div class="modal-head">
+          <h3>${esc(title)}</h3>
+          <button class="icon-btn" data-act="closeModal" aria-label="Close">✕</button>
+        </div>
+        <div class="modal-body">${body}</div>
+        ${opts.footer ? `<div class="modal-foot">${opts.footer}</div>` : ''}
+      </div>
+    </div>`;
+  root.classList.add('open');
+  const bd = $('.modal-backdrop', root);
+  bd.addEventListener('click', e=>{ if(e.target===bd) closeModal(); });
+}
+function closeModal(){
+  $('#modalRoot').classList.remove('open');
+  $('#modalRoot').innerHTML = '';
+}
+function confirmDialog(msg, onYes, yesLabel){
+  openModal('Please Confirm',
+    `<div class="alert danger">${esc(msg)}</div>`,
+    {footer:`<button class="btn ghost" data-act="closeModal">Cancel</button>
+             <button class="btn danger" id="confYes">${esc(yesLabel||'Confirm')}</button>`});
+  $('#confYes').onclick = ()=>{ closeModal(); onYes(); };
+}
+
+/**
+ * Generic form modal.
+ * fields: [{k,label,type,options,req,ph,value,rows,step,min,max,hint}]
+ */
+function formModal(title, fields, values, onSave, opts){
+  values = values || {};
+  opts = opts || {};
+  const body = `<form id="gForm">${fields.map(f=>{
+    const v = values[f.k] !== undefined ? values[f.k] : (f.value!==undefined?f.value:'');
+    let input;
+    if(f.type==='select'){
+      input = `<select name="${f.k}" ${f.req?'required':''}>${
+        (f.options||[]).map(o=>{
+          const val = typeof o==='object'?o.v:o;
+          const lab = typeof o==='object'?o.l:o;
+          return `<option value="${esc(val)}" ${String(val)===String(v)?'selected':''}>${esc(lab)}</option>`;
+        }).join('')}</select>`;
+    } else if(f.type==='textarea'){
+      input = `<textarea name="${f.k}" rows="${f.rows||3}" placeholder="${esc(f.ph||'')}" ${f.req?'required':''}>${esc(v)}</textarea>`;
+    } else {
+      input = `<input type="${f.type||'text'}" name="${f.k}" value="${esc(v)}"
+        placeholder="${esc(f.ph||'')}" ${f.req?'required':''}
+        ${f.step?`step="${f.step}"`:''} ${f.min!==undefined?`min="${f.min}"`:''} ${f.max!==undefined?`max="${f.max}"`:''}>`;
+    }
+    return `<div class="field"><label>${esc(f.label)}${f.req?' *':''}</label>${input}
+      ${f.hint?`<div class="hint">${f.hint}</div>`:''}</div>`;
+  }).join('')}</form>`;
+
+  openModal(title, body, {
+    wide: opts.wide,
+    footer: `<button class="btn ghost" data-act="closeModal">Cancel</button>
+             <button class="btn gold" id="gSave">${esc(opts.saveLabel||'Save')}</button>`
+  });
+
+  const submit = ()=>{
+    const form = $('#gForm');
+    if(!form.checkValidity()){ form.reportValidity(); return; }
+    const fd = new FormData(form);
+    const data = {};
+    fields.forEach(f=>{
+      let val = fd.get(f.k);
+      if(val===null) val='';
+      if(f.type==='number') val = val===''?'':Number(val);
+      data[f.k] = val;
+    });
+    closeModal();
+    onSave(data);
+  };
+  $('#gSave').onclick = submit;
+  $('#gForm').addEventListener('submit', e=>{ e.preventDefault(); submit(); });
+}
+
+function printDoc(html){
+  const pa = $('#printArea');
+  pa.innerHTML = html;
+  window.print();
+}
+
+/* ==========================================================================
+   7. STATE & ROUTER
+   ========================================================================== */
+const state = {
+  route: 'dashboard',
+  params: {},
+  cart: [],            // billing draft
+  billCustomer: null,
+  catalogueFilter: 'all',
+  catalogueQuery: '',
+  reportFrom: '',
+  reportTo: ''
+};
+
+const NAV = [
+  {group:'Main'},
+  {r:'dashboard',  i:'📊', k:'dashboard'},
+  {r:'catalogue',  i:'🗂️', k:'catalogue'},
+  {r:'gov',        i:'🏛️', k:'gov'},
+  {group:'Shop Work'},
+  {r:'printing',   i:'🖨️', k:'printing'},
+  {r:'photo',      i:'📸', k:'photo'},
+  {r:'documents',  i:'📄', k:'documents'},
+  {group:'Business'},
+  {r:'customers',  i:'👥', k:'customers'},
+  {r:'applications', i:'📋', k:'applications'},
+  {r:'billing',    i:'🧾', k:'billing'},
+  {r:'finance',    i:'💰', k:'finance'},
+  {r:'inventory',  i:'📦', k:'inventory'},
+  {group:'Insights'},
+  {r:'reports',    i:'📈', k:'reports'},
+  {r:'pricelist',  i:'🏷️', k:'pricelist'},
+  {group:'System'},
+  {r:'settings',   i:'⚙️', k:'settings'},
+  {r:'guide',      i:'📖', k:'guide'},
+  {r:'about',      i:'ℹ️', k:'about'}
+];
+
+function renderNav(){
+  const nav = $('#nav');
+  nav.innerHTML = NAV.map(item=>{
+    if(item.group) return `<div class="nav-group">${item.group}</div>`;
+    return `<button class="nav-item ${state.route===item.r?'active':''}" data-act="go" data-route="${item.r}">
+      <span class="ico">${item.i}</span><span>${esc(t(item.k))}</span></button>`;
+  }).join('');
+
+  const bn = $('#bottomnav');
+  const items = [
+    {r:'dashboard', i:'📊', k:'dashboard'},
+    {r:'catalogue', i:'🗂️', k:'catalogue'},
+    {r:'billing',   i:'🧾', k:'billing'},
+    {r:'customers', i:'👥', k:'customers'},
+    {r:'reports',   i:'📈', k:'reports'}
+  ];
+  bn.innerHTML = items.map(it=>`<button class="${state.route===it.r?'active':''}" data-act="go" data-route="${it.r}">
+    <span class="ico">${it.i}</span><span>${esc(t(it.k))}</span></button>`).join('');
+}
+
+function go(route, params){
+  state.route = route;
+  state.params = params || {};
+  if(route!=='catalogue' && route!=='gov'){ /* keep filters */ }
+  renderNav();
+  renderView();
+  window.scrollTo({top:0,behavior:'smooth'});
+  $('#sidebar').classList.remove('open');
+}
+
+/* ==========================================================================
+   8. VIEWS
+   ========================================================================== */
+const Views = {};
+
+/* -------------------- DASHBOARD -------------------- */
+Views.dashboard = function(){
+  const db = Store.db;
+  const today = todayISO();
+  const invToday = db.invoices.filter(i=> (i.date||'').slice(0,10)===today);
+  const expToday = db.expenses.filter(e=> (e.date||'').slice(0,10)===today);
+
+  const sum = (arr,f)=> arr.reduce((a,b)=>a+(Number(f(b))||0),0);
+
+  const totalSales = sum(invToday, i=> i.total);
+  const govTotal   = sum(invToday, i=> i.govTotal);
+  const shopRev    = sum(invToday, i=> i.shopTotal + i.addlTotal - i.discount);
+  const printRev   = sum(invToday.filter(i=> i.isPrinting), i=> i.shopTotal + i.addlTotal - i.discount);
+  const servRev    = shopRev - printRev;
+  const expenses   = sum(expToday, e=> e.amount);
+  const netProfit  = shopRev - expenses;
+
+  const pendingApps = db.applications.filter(a=> !['Completed','Delivered','Cancelled','Rejected'].includes(a.status)).length;
+  const doneApps = db.applications.filter(a=> ['Completed','Delivered'].includes(a.status)).length;
+
+  // last 7 days revenue
+  const days = [];
+  for(let i=6;i>=0;i--){
+    const d = new Date(); d.setDate(d.getDate()-i);
+    const iso = d.toISOString().slice(0,10);
+    const v = db.invoices.filter(x=>(x.date||'').slice(0,10)===iso)
+      .reduce((a,b)=>a+(b.shopTotal+b.addlTotal-b.discount),0);
+    days.push({label: d.toLocaleDateString('en-IN',{weekday:'short'}), value: v});
+  }
+
+  // category distribution (all-time shop revenue)
+  const catMap = {};
+  db.invoices.forEach(i=>{
+    (i.items||[]).forEach(it=>{
+      const c = it.cat || 'printing';
+      catMap[c] = (catMap[c]||0) + (it.shop*it.qty + it.addl*it.qty);
+    });
+  });
+  const catData = Object.keys(catMap).map(k=>({label: (CATEGORIES[k]||{name:k}).name, value: catMap[k]}))
+    .sort((a,b)=>b.value-a.value).slice(0,6);
+
+  // payment method distribution
+  const payMap = {};
+  invToday.forEach(i=>{ payMap[i.payment] = (payMap[i.payment]||0) + i.total; });
+  const payData = Object.keys(payMap).map(k=>({label:k, value:payMap[k]}));
+
+  // most used services
+  const svcMap = {};
+  db.invoices.forEach(i=> (i.items||[]).forEach(it=>{
+    svcMap[it.name] = (svcMap[it.name]||0) + it.qty;
+  }));
+  const topSvc = Object.entries(svcMap).sort((a,b)=>b[1]-a[1]).slice(0,5);
+
+  const recent = db.invoices.slice().sort((a,b)=> (b.createdAt||'').localeCompare(a.createdAt||'')).slice(0,8);
+
+  const empty = db.invoices.length===0 && db.customers.length===0;
+
+  return `
+  <div class="page-head">
+    <div>
+      <div class="page-title">Welcome to ${esc(db.settings.business.name)}</div>
+      <div class="page-sub">Manage your services, customers, transactions and daily business operations.</div>
+      <div class="tiny muted" style="margin-top:6px">
+        📅 ${new Date().toLocaleDateString('en-IN',{weekday:'long',day:'2-digit',month:'long',year:'numeric'})}
+      </div>
+    </div>
+    <div class="page-actions">
+      <button class="btn gold" data-act="newBill">＋ ${esc(t('newBill'))}</button>
+      <button class="btn ghost" data-act="quickCustomer">👤 ${esc(t('addCustomer'))}</button>
+    </div>
+  </div>
+
+  <div class="grid stat-grid mb">
+    <div class="stat"><div class="lbl">Today's Total Sales</div><div class="val">${money(totalSales)}</div><div class="sub">${invToday.length} bill(s) today</div></div>
+    <div class="stat green"><div class="lbl">Service Income</div><div class="val">${money(servRev)}</div><div class="sub">Gov services &amp; others</div></div>
+    <div class="stat gold"><div class="lbl">Printing Income</div><div class="val">${money(printRev)}</div><div class="sub">Xerox · Print · Photo</div></div>
+    <div class="stat red"><div class="lbl">Today's Expenses</div><div class="val">${money(expenses)}</div><div class="sub">${expToday.length} entr${expToday.length===1?'y':'ies'}</div></div>
+    <div class="stat ${netProfit>=0?'green':'red'}"><div class="lbl">Net Profit (Shop)</div><div class="val">${money(netProfit)}</div><div class="sub">Excl. govt fees</div></div>
+    <div class="stat"><div class="lbl">Total Customers</div><div class="val">${num(db.customers.length)}</div><div class="sub">Registered</div></div>
+    <div class="stat"><div class="lbl">Pending Applications</div><div class="val">${num(pendingApps)}</div><div class="sub">${doneApps} completed</div></div>
+    <div class="stat"><div class="lbl">Govt Fees Collected (Today)</div><div class="val">${money(govTotal)}</div><div class="sub">Not shop revenue</div></div>
+  </div>
+
+  ${empty ? `
+  <div class="card mb">
+    <div class="empty">
+      <div class="e-ico">🌱</div>
+      <h4>Your dashboard is ready</h4>
+      <p>No transactions yet. Start by creating your first bill or adding a customer. All figures above will update automatically from your real records.</p>
+      <div class="flex" style="justify-content:center">
+        <button class="btn gold" data-act="newBill">Create First Bill</button>
+        <button class="btn ghost" data-act="go" data-route="catalogue">Browse Services</button>
+      </div>
+    </div>
+  </div>` : ''}
+
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr))">
+    <div class="card">
+      <div class="section-title"><span class="bar"></span>Revenue — Last 7 Days</div>
+      <div class="chart-box"><canvas id="c7"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="section-title"><span class="bar"></span>Revenue by Category</div>
+      <div class="chart-box"><canvas id="cCat"></canvas></div>
+      <div class="legend">${catData.map((c,i)=>`<span><i style="background:${['#D4AF37','#1D5B40','#218653','#F2D98A','#778078','#C62828'][i%6]}"></i>${esc(c.label)}</span>`).join('') || '<span class="muted">No data yet</span>'}</div>
+    </div>
+    <div class="card">
+      <div class="section-title"><span class="bar"></span>Today's Payment Methods</div>
+      <div class="chart-box"><canvas id="cPay"></canvas></div>
+      <div class="legend">${payData.map((c,i)=>`<span><i style="background:${['#D4AF37','#1D5B40','#218653','#F2D98A','#778078'][i%5]}"></i>${esc(c.label)} — ${money(c.value)}</span>`).join('') || '<span class="muted">No payments today</span>'}</div>
+    </div>
+    <div class="card">
+      <div class="section-title"><span class="bar"></span>Most Used Services</div>
+      ${topSvc.length ? topSvc.map(([n,c])=>`<div class="kv"><span class="k">${esc(n)}</span><span class="v">${c}×</span></div>`).join('')
+        : '<div class="empty" style="padding:26px"><div class="e-ico">📊</div><p>No service usage recorded yet.</p></div>'}
+    </div>
+  </div>
+
+  <div class="card mt">
+    <div class="section-title"><span class="bar"></span>Quick Actions</div>
+    <div class="flex">
+      <button class="btn" data-act="newBill">🧾 Create New Bill</button>
+      <button class="btn ghost" data-act="quickCustomer">👤 Add Customer</button>
+      <button class="btn ghost" data-act="newApplication">📋 New Application</button>
+      <button class="btn ghost" data-act="go" data-route="printing">🖨️ Printing Order</button>
+      <button class="btn ghost" data-act="addExpense">💸 Add Expense</button>
+      <button class="btn ghost" data-act="go" data-route="applications">🔎 Application Status</button>
+      <button class="btn ghost" data-act="go" data-route="finance">📆 Today's Transactions</button>
+      <button class="btn ghost" data-act="go" data-route="pricelist">🏷️ Generate Price List</button>
+    </div>
+  </div>
+
+  <div class="card mt">
+    <div class="section-title"><span class="bar"></span>Recent Activity</div>
+    ${recent.length ? `<div class="table-wrap"><table>
+      <thead><tr><th>Date &amp; Time</th><th>Invoice</th><th>Customer</th><th>Items</th><th class="num">Amount</th><th>Payment</th></tr></thead>
+      <tbody>${recent.map(i=>`<tr>
+        <td>${dtTime(i.createdAt)}</td>
+        <td><b>${esc(i.no)}</b></td>
+        <td>${esc(i.customerName||'Walk-in')}</td>
+        <td class="tiny muted">${esc((i.items||[]).map(x=>x.name).join(', ').slice(0,60))}</td>
+        <td class="num"><b>${money(i.total)}</b></td>
+        <td><span class="badge ${i.status==='Paid'?'green':i.status==='Partial'?'gold':'red'}">${esc(i.status)}</span></td>
+      </tr>`).join('')}</tbody></table></div>`
+      : '<div class="empty" style="padding:26px"><div class="e-ico">🧾</div><p>No transactions yet. Your recent bills will appear here.</p></div>'}
+  </div>`;
+};
+Views.dashboard.after = function(){
+  const db = Store.db;
+  const days = [];
+  for(let i=6;i>=0;i--){
+    const d = new Date(); d.setDate(d.getDate()-i);
+    const iso = d.toISOString().slice(0,10);
+    const v = db.invoices.filter(x=>(x.date||'').slice(0,10)===iso)
+      .reduce((a,b)=>a+(b.shopTotal+b.addlTotal-b.discount),0);
+    days.push({label:d.toLocaleDateString('en-IN',{weekday:'short'}), value:v});
+  }
+  Chart.bar($('#c7'), days);
+
+  const catMap = {};
+  db.invoices.forEach(i=> (i.items||[]).forEach(it=>{
+    const c = it.cat || 'printing';
+    catMap[c] = (catMap[c]||0) + (it.shop*it.qty + it.addl*it.qty);
+  }));
+  const catData = Object.keys(catMap).map(k=>({label:k, value:catMap[k]})).sort((a,b)=>b.value-a.value).slice(0,6);
+  Chart.doughnut($('#cCat'), catData);
+
+  const today = todayISO();
+  const payMap = {};
+  db.invoices.filter(i=>(i.date||'').slice(0,10)===today)
+    .forEach(i=>{ payMap[i.payment] = (payMap[i.payment]||0)+i.total; });
+  Chart.doughnut($('#cPay'), Object.keys(payMap).map(k=>({label:k,value:payMap[k]})));
+};
+
+/* -------------------- SERVICE CATALOGUE -------------------- */
+function serviceCard(s){
+  const cat = CATEGORIES[s.cat];
+  return `<div class="svc">
+    <div class="no">#${s.num}</div>
+    <div class="cat">${cat.icon} ${esc(isBn()?cat.bn:cat.name)}</div>
+    <div class="en">${esc(s.en)}</div>
+    <div class="bn">${esc(s.bn)}</div>
+    <div class="prices">
+      <div class="pbox"><div class="k">Govt Fee</div><div class="v">${esc(s.gov)}</div></div>
+      <div class="pbox"><div class="k">Shop Charge</div><div class="v">${money(s.shopStd)}</div></div>
+      <div class="pbox"><div class="k">Est. Total</div><div class="v" style="color:var(--success)">${money(s.govNum + s.shopStd)}</div></div>
+    </div>
+    <div class="actions">
+      <button class="btn ghost sm" data-act="svcDetail" data-num="${s.num}">Details</button>
+      <button class="btn gold sm" data-act="svcAddBill" data-num="${s.num}">Add to Bill</button>
+    </div>
+  </div>`;
+}
+
+function catalogueHTML(filterKey){
+  const q = state.catalogueQuery;
+  let list = Services.search(q);
+  if(filterKey && filterKey!=='all'){
+    if(filterKey==='gov') list = list.filter(s=>['identity','ration','wb','health','edu','transport','business'].includes(s.cat));
+    else if(filterKey==='fin') list = list.filter(s=>s.cat==='banking');
+    else if(filterKey==='print') list = list.filter(s=>['printing','otherprint'].includes(s.cat));
+    else if(filterKey==='free') list = list.filter(s=>/₹0/.test(s.gov));
+    else if(filterKey==='paid') list = list.filter(s=> firstNum(s.gov)>0);
+    else if(filterKey==='var') list = list.filter(s=> s.govVar);
+    else list = list.filter(s=>s.cat===filterKey);
+  }
+  return list;
+}
+
+function renderCatalogue(title, subtitle, presetFilter){
+  const filter = presetFilter || state.catalogueFilter;
+  const list = catalogueHTML(filter);
+
+  const chips = [
+    ['all','All Services'],['gov','Government'],['identity','Identity'],['ration','Ration'],
+    ['wb','West Bengal'],['banking','Banking'],['edu','Education'],['transport','Transport'],
+    ['printing','Printing'],['otherprint','Photo Studio'],['business','Business'],['travel','Travel'],
+    ['free','Free Govt Fee'],['paid','Paid Govt Fee'],['var','Variable Fee']
+  ];
+
+  return `
+  <div class="page-head">
+    <div>
+      <div class="page-title">${esc(title)}</div>
+      <div class="page-sub">${esc(subtitle)}</div>
+    </div>
+    <div class="page-actions">
+      <button class="btn ghost" data-act="go" data-route="pricelist">🏷️ Price List</button>
+    </div>
+  </div>
+
+  <div class="card mb" style="padding:12px">
+    <div class="flex" style="gap:10px">
+      <div class="searchbox" style="max-width:none;flex:1;display:flex">
+        <span>🔍</span>
+        <input id="catSearch" placeholder="Search English / বাংলা / number / keyword…" value="${esc(state.catalogueQuery)}">
+      </div>
+      <span class="badge blue">${list.length} services</span>
+    </div>
+  </div>
+
+  <div class="chips">
+    ${chips.map(([k,l])=>`<button class="chip ${filter===k?'active':''}" data-act="catFilter" data-f="${k}">${l}</button>`).join('')}
+  </div>
+
+  ${list.length ? `<div class="svc-grid">${list.map(serviceCard).join('')}</div>`
+    : `<div class="card"><div class="empty"><div class="e-ico">🔍</div><h4>No services found</h4>
+       <p>Try a different keyword, or clear the filters to see all 124 services.</p>
+       <button class="btn ghost" data-act="catFilter" data-f="all">Clear Filters</button></div></div>`}
+  `;
+}
+
+Views.catalogue = function(){
+  return renderCatalogue('All Services',
+    'Explore and manage every digital, government and printing service offered by your shop.', null);
+};
+Views.catalogue.after = function(){
+  const inp = $('#catSearch');
+  if(inp){
+    inp.addEventListener('input', e=>{
+      state.catalogueQuery = e.target.value;
+      const list = catalogueHTML(state.catalogueFilter);
+      const grid = $('.svc-grid') || $('.card .empty')?.closest('.card');
+      // simple re-render of the grid area only
+      const container = $('#view');
+      const head = container.querySelector('.page-head');
+      const html = renderCatalogue('All Services','Explore and manage every digital, government and printing service offered by your shop.', null);
+      const tmp = document.createElement('div');
+      tmp.innerHTML = html;
+      const newGrid = tmp.querySelector('.svc-grid');
+      const oldGrid = container.querySelector('.svc-grid');
+      const oldEmpty = container.querySelector('.card .empty');
+      if(newGrid && oldGrid){ oldGrid.replaceWith(newGrid); }
+      else if(newGrid && oldEmpty){ oldEmpty.closest('.card').replaceWith(newGrid); }
+      else if(!newGrid){
+        const emptyCard = tmp.querySelector('.card:last-child');
+        if(oldGrid) oldGrid.replaceWith(emptyCard);
+      }
+      // refresh count badge
+      const badge = container.querySelector('.badge.blue');
+      if(badge) badge.textContent = list.length + ' services';
+      const si = $('#catSearch'); if(si){ si.focus(); si.setSelectionRange(si.value.length,si.value.length); }
+    });
+  }
+};
+
+Views.gov = function(){
+  state.catalogueFilter = 'gov';
+  return renderCatalogue('Government & CSC Services',
+    'All state and central government services handled at the shop. Government fees and shop charges are always shown separately.', 'gov');
+};
+Views.gov.after = Views.catalogue.after;
+
+Views.printing = function(){
+  return printingModuleHTML('printing');
+};
+Views.photo = function(){ return printingModuleHTML('photo'); };
+Views.documents = function(){ return documentsHTML(); };
+
+/* -------------------- PRINTING MODULE -------------------- */
+function printingModuleHTML(tab){
+  const printingServices = Services.list().filter(s=>['printing','otherprint'].includes(s.cat));
+  return `
+  <div class="page-head">
+    <div>
+      <div class="page-title">🖨️ Printing, Xerox &amp; Photo Studio</div>
+      <div class="page-sub">Fast calculators for photocopy, colour print, photo print, lamination, binding and mixed orders. Everything can be pushed straight into a bill.</div>
+    </div>
+    <div class="page-actions">
+      <button class="btn gold" data-act="newBill">🧾 Open Billing</button>
+    </div>
+  </div>
+
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+
+    <div class="card">
+      <div class="section-title"><span class="bar"></span>Photocopy / Print Calculator</div>
+      <div class="field"><label>Print Type</label>
+        <select id="pcType">
+          <option value="2">B/W Photocopy — A4 (₹2/pg)</option>
+          <option value="3">B/W Photocopy — A4 Double Side (₹3/sheet)</option>
+          <option value="5">B/W Document Print (₹5/pg)</option>
+          <option value="10">Colour Print — A4 (₹10/pg)</option>
+          <option value="15">Colour Full Page — A4 (₹15/pg)</option>
+          <option value="8">Colour Print — A5 (₹8/pg)</option>
+        </select>
+      </div>
+      <div class="row3">
+        <div class="field"><label>Pages</label><input type="number" id="pcPages" value="1" min="1"></div>
+        <div class="field"><label>Copies</label><input type="number" id="pcCopies" value="1" min="1"></div>
+        <div class="field"><label>Rate ₹</label><input type="number" id="pcRate" value="2" min="0" step="0.5"></div>
+      </div>
+      <div class="alert info" style="margin-bottom:10px">
+        Total = Pages × Copies × Rate = <b id="pcTotal">₹2.00</b>
+      </div>
+      <button class="btn block" data-act="pcAdd">➕ Add to Bill</button>
+    </div>
+
+    <div class="card">
+      <div class="section-title"><span class="bar"></span>Photo Printing Calculator</div>
+      <div class="field"><label>Photo Size</label>
+        <select id="phSize">
+          <option value="4×6 inch Glossy Photo" data-rate="20">4×6 inch Glossy (₹20)</option>
+          <option value="5×7 inch Glossy Photo" data-rate="35">5×7 inch Glossy (₹35)</option>
+          <option value="6×8 inch Glossy Photo" data-rate="50">6×8 inch Glossy (₹50)</option>
+          <option value="8×10 inch Glossy Photo" data-rate="90">8×10 inch Glossy (₹90)</option>
+          <option value="A4 Glossy Photo Print" data-rate="40">A4 Glossy (₹40)</option>
+          <option value="Passport Size Photo Set (8 pcs)" data-rate="50">Passport Photo Set of 8 (₹50)</option>
+          <option value="Stamp Size Photo Set" data-rate="40">Stamp Size Set (₹40)</option>
+        </select>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Quantity</label><input type="number" id="phQty" value="1" min="1"></div>
+        <div class="field"><label>Rate ₹ / photo</label><input type="number" id="phRate" value="20" min="0" step="0.5"></div>
+      </div>
+      <div class="alert info" style="margin-bottom:10px">Total = Qty × Rate = <b id="phTotal">₹20.00</b></div>
+      <button class="btn block" data-act="phAdd">➕ Add to Bill</button>
+    </div>
+
+    <div class="card">
+      <div class="section-title"><span class="bar"></span>Lamination Calculator</div>
+      <div class="field"><label>Lamination Size</label>
+        <select id="lmSize">
+          <option value="Small Card / Pocket Lamination" data-rate="12">Small Card / Pocket (₹12)</option>
+          <option value="Aadhaar Size Lamination" data-rate="15">Aadhaar Size (₹15)</option>
+          <option value="PAN Size Lamination" data-rate="15">PAN Size (₹15)</option>
+          <option value="A4 Page Lamination" data-rate="25">A4 Page (₹25)</option>
+          <option value="Legal Size Lamination" data-rate="30">Legal Size (₹30)</option>
+          <option value="A3 Oversized Lamination" data-rate="50">A3 Oversized (₹50)</option>
+        </select>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Quantity</label><input type="number" id="lmQty" value="1" min="1"></div>
+        <div class="field"><label>Rate ₹ / unit</label><input type="number" id="lmRate" value="25" min="0" step="0.5"></div>
+      </div>
+      <div class="field"><label>Extra Cutting Charge ₹</label><input type="number" id="lmCut" value="0" min="0"></div>
+      <div class="alert info" style="margin-bottom:10px">Total = <b id="lmTotal">₹25.00</b></div>
+      <button class="btn block" data-act="lmAdd">➕ Add to Bill</button>
+    </div>
+
+    <div class="card">
+      <div class="section-title"><span class="bar"></span>Binding Calculator</div>
+      <div class="field"><label>Binding Type</label>
+        <select id="bdType">
+          <option value="Spiral / Comb Binding" data-rate="40">Spiral / Comb Binding (₹40)</option>
+          <option value="Hardbound Binding" data-rate="150">Hardbound Binding (₹150)</option>
+        </select>
+      </div>
+      <div class="row3">
+        <div class="field"><label>Pages</label><input type="number" id="bdPages" value="50" min="1"></div>
+        <div class="field"><label>Copies</label><input type="number" id="bdQty" value="1" min="1"></div>
+        <div class="field"><label>Rate ₹ / copy</label><input type="number" id="bdRate" value="40" min="0"></div>
+      </div>
+      <div class="alert info" style="margin-bottom:10px">Total = Copies × Rate = <b id="bdTotal">₹40.00</b></div>
+      <button class="btn block" data-act="bdAdd">➕ Add to Bill</button>
+    </div>
+
+  </div>
+
+  <div class="card mt">
+    <div class="section-title"><span class="bar"></span>Mixed Printing Order (multi-item)</div>
+    <div class="row3">
+      <div class="field"><label>Item Description</label><input id="mxDesc" placeholder="e.g. 20 B/W pages"></div>
+      <div class="field"><label>Qty</label><input type="number" id="mxQty" value="1" min="1"></div>
+      <div class="field"><label>Rate ₹</label><input type="number" id="mxRate" value="2" min="0" step="0.5"></div>
+    </div>
+    <div class="flex mb">
+      <button class="btn ghost" data-act="mxAdd">➕ Add Item</button>
+      <span class="badge blue" id="mxCount">0 items · ₹0.00</span>
+      <button class="btn right" data-act="mxToBill">🧾 Send to Billing</button>
+    </div>
+    <div id="mxList" class="tiny muted">No items added yet.</div>
+  </div>
+
+  <div class="card mt">
+    <div class="section-title"><span class="bar"></span>Quick Service Picker (Printing &amp; Studio)</div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>#</th><th>Service</th><th>Bengali</th><th>Unit</th><th class="num">Shop Charge</th><th></th></tr></thead>
+      <tbody>${printingServices.map(s=>`<tr>
+        <td>${s.num}</td>
+        <td><b>${esc(s.en)}</b></td>
+        <td class="tiny muted">${esc(s.bn)}</td>
+        <td class="tiny">${esc(s.unit)}</td>
+        <td class="num">${s.shopMin===s.shopMax?money(s.shopMin):money(s.shopMin)+' – '+money(s.shopMax)}</td>
+        <td><button class="btn sm gold" data-act="svcAddBill" data-num="${s.num}">Add</button></td>
+      </tr>`).join('')}</tbody></table></div>
+  </div>`;
+}
+
+/* -------------------- DOCUMENT PROCESSING -------------------- */
+function documentsHTML(){
+  const docs = Services.list().filter(s=>[104,108,109,110,121,122,123,74,93].includes(s.num));
+  return `
+  <div class="page-head">
+    <div>
+      <div class="page-title">📄 Document Processing</div>
+      <div class="page-sub">Record document services, typing, PDF work and image resizing. Every item can be billed instantly. Files are NOT uploaded anywhere — this module manages the service records and charges only.</div>
+    </div>
+  </div>
+
+  <div class="alert info mb">
+    <b>Note:</b> This module records and bills document-processing services. It does not perform automated PDF conversion in the browser.
+    For actual file work, use your local desktop tools — no customer document is ever uploaded by this application.
+  </div>
+
+  <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr))">
+    ${docs.map(s=>`<div class="svc">
+      <div class="no">#${s.num}</div>
+      <div class="cat">${CATEGORIES[s.cat].icon} ${esc(CATEGORIES[s.cat].name)}</div>
+      <div class="en">${esc(s.en)}</div>
+      <div class="bn">${esc(s.bn)}</div>
+      <div class="prices">
+        <div class="pbox"><div class="k">Govt Fee</div><div class="v">${esc(s.gov)}</div></div>
+        <div class="pbox"><div class="k">Shop Charge</div><div class="v">${money(s.shopStd)}</div></div>
+        <div class="pbox"><div class="k">Unit</div><div class="v tiny">${esc(s.unit)}</div></div>
+      </div>
+      <div class="actions">
+        <button class="btn ghost sm" data-act="svcDetail" data-num="${s.num}">Details</button>
+        <button class="btn gold sm" data-act="svcAddBill" data-num="${s.num}">Add to Bill</button>
+      </div>
+    </div>`).join('')}
+  </div>
+
+  <div class="card mt">
+    <div class="section-title"><span class="bar"></span>Supported Document Services</div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Service</th><th>Description</th><th class="num">Suggested Charge</th></tr></thead>
+      <tbody>
+        <tr><td>Image to PDF</td><td>Convert photos / scanned images into a single PDF</td><td class="num">₹20 – ₹30</td></tr>
+        <tr><td>PDF to Image</td><td>Extract pages from a PDF as images</td><td class="num">₹20 – ₹30</td></tr>
+        <tr><td>PDF Merge</td><td>Combine multiple PDF files into one</td><td class="num">₹20 – ₹30</td></tr>
+        <tr><td>PDF Split</td><td>Split a large PDF into separate files</td><td class="num">₹20 – ₹30</td></tr>
+        <tr><td>PDF Compression</td><td>Reduce MB to KB for government portals</td><td class="num">₹20 – ₹30</td></tr>
+        <tr><td>PDF Page Rotation / Extraction</td><td>Fix orientation or extract selected pages</td><td class="num">₹20 – ₹30</td></tr>
+        <tr><td>Image Resizing / KB-MB Reduction</td><td>Resize &amp; compress for online forms</td><td class="num">₹20 – ₹30</td></tr>
+        <tr><td>Document Scanning</td><td>Flatbed scan to PDF / JPG</td><td class="num">₹10 – ₹20</td></tr>
+        <tr><td>English / Bengali Typing</td><td>Applications, letters, notices</td><td class="num">₹20 – ₹30 / page</td></tr>
+        <tr><td>Resume / Biodata Creation</td><td>Formatted CV preparation</td><td class="num">₹50 – ₹100</td></tr>
+      </tbody></table></div>
+  </div>`;
+}
+
+/* -------------------- CUSTOMERS -------------------- */
+Views.customers = function(){
+  const q = (state.params.q||'').toLowerCase();
+  let list = Store.db.customers.slice();
+  if(q) list = list.filter(c=>
+    (c.name||'').toLowerCase().includes(q) ||
+    (c.bnName||'').includes(q) ||
+    (c.mobile||'').includes(q) ||
+    (c.village||'').toLowerCase().includes(q) ||
+    (c.id||'').toLowerCase().includes(q));
+
+  return `
+  <div class="page-head">
+    <div>
+      <div class="page-title">👥 Customer Management</div>
+      <div class="page-sub">Registered customers, contact details and full history. Walk-in customers do not need to be registered.</div>
+    </div>
+    <div class="page-actions">
+      <button class="btn gold" data-act="quickCustomer">＋ Add Customer</button>
+      <button class="btn ghost" data-act="exportCustomers">⬇ Export CSV</button>
+    </div>
+  </div>
+
+  <div class="card mb" style="padding:12px">
+    <div class="searchbox" style="max-width:none;display:flex">
+      <span>🔍</span>
+      <input id="custSearch" placeholder="Search by name, mobile, village or customer ID…" value="${esc(state.params.q||'')}">
+    </div>
+  </div>
+
+  ${list.length ? `<div class="table-wrap"><table>
+    <thead><tr><th>ID</th><th>Name</th><th>Mobile</th><th>Village</th><th>District</th><th class="num">Bills</th><th class="num">Total Spent</th><th class="num">Due</th><th></th></tr></thead>
+    <tbody>${list.map(c=>{
+      const inv = Store.db.invoices.filter(i=>i.customerId===c.id);
+      const spent = inv.reduce((a,b)=>a+b.paid,0);
+      const due = inv.reduce((a,b)=>a+(b.total-b.paid),0);
+      return `<tr>
+        <td class="tiny mono">${esc(c.id)}</td>
+        <td><b>${esc(c.name)}</b>${c.bnName?`<div class="tiny muted">${esc(c.bnName)}</div>`:''}</td>
+        <td class="mono">${esc(c.mobile||'—')}</td>
+        <td>${esc(c.village||'—')}</td>
+        <td>${esc(c.district||'—')}</td>
+        <td class="num">${inv.length}</td>
+        <td class="num">${money(spent)}</td>
+        <td class="num" style="color:${due>0?'var(--danger)':'inherit'}">${money(due)}</td>
+        <td><button class="btn sm ghost" data-act="custView" data-id="${c.id}">View</button></td>
+      </tr>`;
+    }).join('')}</tbody></table></div>`
+    : `<div class="card"><div class="empty"><div class="e-ico">👥</div><h4>No customers yet</h4>
+       <p>Add your first customer to start tracking bills, applications and payments.</p>
+       <button class="btn gold" data-act="quickCustomer">Add Customer</button></div></div>`}
+  `;
+};
+Views.customers.after = function(){
+  const inp = $('#custSearch');
+  if(inp) inp.addEventListener('keydown', e=>{
+    if(e.key==='Enter'){ state.params.q = e.target.value; renderView(); }
+  });
+  if(inp) inp.addEventListener('input', e=>{
+    clearTimeout(inp._tm);
+    inp._tm = setTimeout(()=>{ state.params.q = e.target.value; renderView(); const i2=$('#custSearch'); if(i2){i2.focus(); i2.setSelectionRange(i2.value.length,i2.value.length);} }, 320);
+  });
+};
+
+/* -------------------- APPLICATIONS -------------------- */
+const APP_STATUS = ['New Request','Documents Pending','Ready to Submit','Submitted','Under Process','Query / Correction Required','Approved','Rejected','Completed','Delivered','Cancelled'];
+const STATUS_CLASS = {
+  'New Request':'grey','Documents Pending':'gold','Ready to Submit':'blue','Submitted':'blue',
+  'Under Process':'gold','Query / Correction Required':'red','Approved':'green','Rejected':'red',
+  'Completed':'green','Delivered':'green','Cancelled':'grey'
+};
+
+Views.applications = function(){
+  const f = state.params.status || 'all';
+  let list = Store.db.applications.slice().sort((a,b)=>(b.createdAt||'').localeCompare(a.createdAt||''));
+  if(f!=='all') list = list.filter(a=>a.status===f);
+
+  return `
+  <div class="page-head">
+    <div>
+      <div class="page-title">📋 Application Tracking</div>
+      <div class="page-sub">Track every government application from submission to delivery. Submitting an application does not imply government approval.</div>
+    </div>
+    <div class="page-actions"><button class="btn gold" data-act="newApplication">＋ New Application</button></div>
+  </div>
+
+  <div class="chips">
+    <button class="chip ${f==='all'?'active':''}" data-act="appFilter" data-f="all">All (${Store.db.applications.length})</button>
+    ${APP_STATUS.map(s=>{
+      const n = Store.db.applications.filter(a=>a.status===s).length;
+      return `<button class="chip ${f===s?'active':''}" data-act="appFilter" data-f="${esc(s)}">${esc(s)} (${n})</button>`;
+    }).join('')}
+  </div>
+
+  ${list.length ? `<div class="table-wrap"><table>
+    <thead><tr><th>App ID</th><th>Customer</th><th>Service</th><th>Ref No.</th><th>Submitted</th><th>Follow-up</th><th class="num">Total</th><th class="num">Due</th><th>Status</th><th></th></tr></thead>
+    <tbody>${list.map(a=>`<tr>
+      <td class="tiny mono">${esc(a.id)}</td>
+      <td><b>${esc(a.customerName)}</b><div class="tiny muted">${esc(a.mobile||'')}</div></td>
+      <td class="tiny">${esc(a.serviceName)}</td>
+      <td class="tiny mono">${esc(a.refNo||'—')}</td>
+      <td class="tiny">${a.submittedDate?dt(a.submittedDate):'—'}</td>
+      <td class="tiny">${a.followUpDate?dt(a.followUpDate):'—'}</td>
+      <td class="num">${money(a.govFee+a.shopFee)}</td>
+      <td class="num" style="color:${(a.govFee+a.shopFee-a.paid)>0?'var(--danger)':'inherit'}">${money(a.govFee+a.shopFee-a.paid)}</td>
+      <td><span class="badge ${STATUS_CLASS[a.status]||'grey'}">${esc(a.status)}</span></td>
+      <td><button class="btn sm ghost" data-act="appView" data-id="${a.id}">Open</button></td>
+    </tr>`).join('')}</tbody></table></div>`
+    : `<div class="card"><div class="empty"><div class="e-ico">📋</div><h4>No applications tracked</h4>
+       <p>Create an application record when a customer submits a government form so you can follow it up later.</p>
+       <button class="btn gold" data-act="newApplication">New Application</button></div></div>`}
+  `;
+};
+
+/* -------------------- BILLING -------------------- */
+Views.billing = function(){
+  const cust = state.billCustomer;
+  const cart = state.cart;
+  const govTotal = cart.reduce((a,i)=>a+i.gov*i.qty,0);
+  const shopTotal = cart.reduce((a,i)=>a+i.shop*i.qty,0);
+  const addlTotal = cart.reduce((a,i)=>a+i.addl*i.qty,0);
+  const discount = Number(state.billDiscount||0);
+  const total = govTotal + shopTotal + addlTotal - discount;
+
+  const recent = Store.db.invoices.slice().sort((a,b)=>(b.createdAt||'').localeCompare(a.createdAt||'')).slice(0,15);
+
+  return `
+  <div class="page-head">
+    <div>
+      <div class="page-title">🧾 Billing &amp; Invoices</div>
+      <div class="page-sub">Create a bill with multiple services. Government fees and shop charges are always separated.</div>
+    </div>
+    <div class="page-actions">
+      <button class="btn ghost" data-act="clearCart">🗑 Clear Draft</button>
+    </div>
+  </div>
+
+  <div class="grid" style="grid-template-columns:minmax(0,1.45fr) minmax(300px,1fr);align-items:start">
+    <div>
+      <div class="card mb">
+        <div class="section-title"><span class="bar"></span>Step 1 — Customer</div>
+        <div class="flex">
+          <select id="billCust" style="flex:1;padding:9px 11px;border-radius:9px;border:1px solid var(--border);background:var(--surface)">
+            <option value="">🚶 Walk-in Customer</option>
+            ${Store.db.customers.map(c=>`<option value="${c.id}" ${cust&&cust.id===c.id?'selected':''}>${esc(c.name)} — ${esc(c.mobile||'no mobile')}</option>`).join('')}
+          </select>
+          <button class="btn ghost" data-act="quickCustomer">＋ New</button>
+        </div>
+        <div class="hint">Walk-in customers can be billed without registration.</div>
+      </div>
+
+      <div class="card mb">
+        <div class="section-title"><span class="bar"></span>Step 2 — Add Services</div>
+        <div class="searchbox" style="max-width:none;display:flex;margin-bottom:10px">
+          <span>🔍</span>
+          <input id="billSvcSearch" placeholder="Search service by English / বাংলা name or number…">
+        </div>
+        <div id="billSvcResults" style="max-height:220px;overflow-y:auto;border:1px solid var(--border);border-radius:10px;display:none"></div>
+        <div class="flex mt">
+          <button class="btn ghost sm" data-act="go" data-route="catalogue">Browse Catalogue</button>
+          <button class="btn ghost sm" data-act="go" data-route="printing">Printing Calculators</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title"><span class="bar"></span>Bill Items (${cart.length})</div>
+        ${cart.length ? `<div class="table-wrap"><table style="min-width:640px">
+          <thead><tr><th>Service</th><th class="num">Qty</th><th class="num">Govt Fee</th><th class="num">Shop</th><th class="num">Addl</th><th class="num">Line Total</th><th></th></tr></thead>
+          <tbody>${cart.map((i,idx)=>`<tr>
+            <td><b class="tiny">${esc(i.name)}</b><div class="tiny muted">${esc(i.unit||'')}</div></td>
+            <td class="num"><input type="number" min="1" value="${i.qty}" data-cart-qty="${idx}" style="width:62px;padding:4px 6px;border-radius:6px;border:1px solid var(--border);background:var(--surface);text-align:right"></td>
+            <td class="num"><input type="number" min="0" step="0.5" value="${i.gov}" data-cart-gov="${idx}" style="width:78px;padding:4px 6px;border-radius:6px;border:1px solid var(--border);background:var(--surface);text-align:right"></td>
+            <td class="num"><input type="number" min="0" step="0.5" value="${i.shop}" data-cart-shop="${idx}" style="width:78px;padding:4px 6px;border-radius:6px;border:1px solid var(--border);background:var(--surface);text-align:right"></td>
+            <td class="num"><input type="number" min="0" step="0.5" value="${i.addl}" data-cart-addl="${idx}" style="width:72px;padding:4px 6px;border-radius:6px;border:1px solid var(--border);background:var(--surface);text-align:right"></td>
+            <td class="num"><b>${money((i.gov+i.shop+i.addl)*i.qty)}</b></td>
+            <td><button class="btn sm ghost" data-act="cartRemove" data-idx="${idx}">✕</button></td>
+          </tr>`).join('')}</tbody></table></div>`
+          : `<div class="empty" style="padding:26px"><div class="e-ico">🛒</div><p>No items added. Search above or use the printing calculators.</p></div>`}
+      </div>
+    </div>
+
+    <div class="card" style="position:sticky;top:76px">
+      <div class="section-title"><span class="bar"></span>Step 3 — Totals</div>
+      <div class="kv"><span class="k">Government Fees</span><span class="v">${money(govTotal)}</span></div>
+      <div class="kv"><span class="k">Shop Service Charge</span><span class="v">${money(shopTotal)}</span></div>
+      <div class="kv"><span class="k">Additional / Printing</span><span class="v">${money(addlTotal)}</span></div>
+      <div class="field mt"><label>Discount ₹</label>
+        <input type="number" id="billDiscount" min="0" step="0.5" value="${discount}">
+      </div>
+      <div class="kv" style="font-size:15px"><span class="k"><b>Total Payable</b></span><span class="v" style="color:var(--success);font-size:17px">${money(total)}</span></div>
+
+      <div class="divider"></div>
+      <div class="section-title"><span class="bar"></span>Step 4 — Payment</div>
+      <div class="field"><label>Payment Method</label>
+        <select id="billPay">
+          <option>Cash</option><option>UPI</option><option>Bank Transfer</option><option>Card</option><option>Other</option>
+        </select>
+      </div>
+      <div class="field"><label>Amount Received ₹</label>
+        <input type="number" id="billPaid" min="0" step="0.5" value="${total}">
+      </div>
+      <div class="alert info" id="billStatusHint">Status: Paid</div>
+
+      <button class="btn gold block mt" data-act="saveBill" ${cart.length?'':'disabled'}>💾 Generate Invoice</button>
+
+      <div class="divider"></div>
+      <div class="tiny muted">
+        Government fees are collected on behalf of the relevant official portal and are not shop revenue.
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt">
+    <div class="section-title"><span class="bar"></span>Recent Invoices</div>
+    ${recent.length ? `<div class="table-wrap"><table>
+      <thead><tr><th>Invoice</th><th>Date</th><th>Customer</th><th class="num">Total</th><th class="num">Paid</th><th>Status</th><th></th></tr></thead>
+      <tbody>${recent.map(i=>`<tr>
+        <td><b>${esc(i.no)}</b></td>
+        <td class="tiny">${dtTime(i.createdAt)}</td>
+        <td>${esc(i.customerName||'Walk-in')}</td>
+        <td class="num">${money(i.total)}</td>
+        <td class="num">${money(i.paid)}</td>
+        <td><span class="badge ${i.status==='Paid'?'green':i.status==='Partial'?'gold':i.status==='Refunded'?'grey':'red'}">${esc(i.status)}</span></td>
+        <td><button class="btn sm ghost" data-act="invoiceView" data-id="${i.id}">View</button></td>
+      </tr>`).join('')}</tbody></table></div>`
+      : '<div class="empty" style="padding:26px"><div class="e-ico">🧾</div><p>No invoices generated yet.</p></div>'}
+  </div>`;
+};
+
+Views.billing.after = function(){
+  const custSel = $('#billCust');
+  if(custSel) custSel.addEventListener('change', e=>{
+    const id = e.target.value;
+    state.billCustomer = id ? Store.db.customers.find(c=>c.id===id) : null;
+  });
+
+  const search = $('#billSvcSearch');
+  const results = $('#billSvcResults');
+  if(search && results){
+    search.addEventListener('input', ()=>{
+      const q = search.value.trim();
+      if(!q){ results.style.display='none'; results.innerHTML=''; return; }
+      const list = Services.search(q).slice(0,25);
+      results.style.display = list.length?'block':'none';
+      results.innerHTML = list.map(s=>`<div class="sr-item" data-act="billAddSvc" data-num="${s.num}">
+        <div><div class="t">${esc(s.en)}</div><div class="s">${esc(s.bn)} · ${esc(s.unit)}</div></div>
+        <span class="badge gold">${money(s.shopStd)}</span>
+      </div>`).join('') || '';
+    });
+  }
+
+  const disc = $('#billDiscount');
+  if(disc) disc.addEventListener('input', e=>{ state.billDiscount = Number(e.target.value)||0; renderView(); });
+
+  const paid = $('#billPaid');
+  if(paid) paid.addEventListener('input', ()=>updateBillStatusHint());
+
+  $$('[data-cart-qty]').forEach(inp=>inp.addEventListener('input', e=>{
+    const i = Number(e.target.dataset.cartQty);
+    state.cart[i].qty = Math.max(1, Number(e.target.value)||1);
+    renderView();
+  }));
+  $$('[data-cart-gov]').forEach(inp=>inp.addEventListener('input', e=>{
+    const i = Number(e.target.dataset.cartGov);
+    state.cart[i].gov = Math.max(0, Number(e.target.value)||0);
+    renderView();
+  }));
+  $$('[data-cart-shop]').forEach(inp=>inp.addEventListener('input', e=>{
+    const i = Number(e.target.dataset.cartShop);
+    state.cart[i].shop = Math.max(0, Number(e.target.value)||0);
+    renderView();
+  }));
+  $$('[data-cart-addl]').forEach(inp=>inp.addEventListener('input', e=>{
+    const i = Number(e.target.dataset.cartAddl);
+    state.cart[i].addl = Math.max(0, Number(e.target.value)||0);
+    renderView();
+  }));
+  updateBillStatusHint();
+};
+function updateBillStatusHint(){
+  const hint = $('#billStatusHint');
+  const paidEl = $('#billPaid');
+  if(!hint || !paidEl) return;
+  const cart = state.cart;
+  const govTotal = cart.reduce((a,i)=>a+i.gov*i.qty,0);
+  const shopTotal = cart.reduce((a,i)=>a+i.shop*i.qty,0);
+  const addlTotal = cart.reduce((a,i)=>a+i.addl*i.qty,0);
+  const total = govTotal+shopTotal+addlTotal-(Number(state.billDiscount)||0);
+  const paid = Number(paidEl.value)||0;
+  let s = 'Unpaid';
+  if(paid >= total && total > 0) s = 'Paid';
+  else if(paid > 0) s = 'Partial';
+  hint.innerHTML = `Status: <b>${s}</b> · Balance: <b>${money(Math.max(0,total-paid))}</b>`;
+}
+
+/* -------------------- FINANCE -------------------- */
+Views.finance = function(){
+  const db = Store.db;
+  const inv = db.invoices;
+  const expenses = db.expenses;
+  const incomes = db.incomes;
+
+  const shopRev = inv.reduce((a,i)=>a+i.shopTotal+i.addlTotal-i.discount,0);
+  const govRev = inv.reduce((a,i)=>a+i.govTotal,0);
+  const manualIncome = incomes.reduce((a,i)=>a+Number(i.amount||0),0);
+  const totalExp = expenses.reduce((a,e)=>a+Number(e.amount||0),0);
+  const net = shopRev + manualIncome - totalExp;
+
+  const allTrans = [
+    ...inv.map(i=>({type:'invoice', date:i.createdAt, label:'Invoice '+i.no, sub:(i.customerName||'Walk-in'), amount:i.total, method:i.payment, shop:i.shopTotal+i.addlTotal-i.discount, gov:i.govTotal})),
+    ...incomes.map(i=>({type:'income', date:i.date, label:i.category, sub:i.description||'', amount:Number(i.amount), method:i.method, shop:Number(i.amount), gov:0})),
+    ...expenses.map(e=>({type:'expense', date:e.date, label:e.category, sub:e.description||'', amount:-Number(e.amount), method:e.method, shop:0, gov:0}))
+  ].sort((a,b)=> (b.date||'').localeCompare(a.date||'')).slice(0,40);
+
+  return `
+  <div class="page-head">
+    <div>
+      <div class="page-title">💰 Income &amp; Expenses</div>
+      <div class="page-sub">Separate shop revenue from government fees. Commissions count as income; pass-through amounts do not.</div>
+    </div>
+    <div class="page-actions">
+      <button class="btn ghost" data-act="addIncome">＋ Income</button>
+      <button class="btn gold" data-act="addExpense">＋ Expense</button>
+    </div>
+  </div>
+
+  <div class="grid stat-grid mb">
+    <div class="stat"><div class="lbl">Total Collection (Bills)</div><div class="val">${money(govRev+shopRev)}</div><div class="sub">All invoices</div></div>
+    <div class="stat gold"><div class="lbl">Government Fees</div><div class="val">${money(govRev)}</div><div class="sub">Pass-through · not revenue</div></div>
+    <div class="stat green"><div class="lbl">Shop Revenue</div><div class="val">${money(shopRev)}</div><div class="sub">Service + printing</div></div>
+    <div class="stat green"><div class="lbl">Other Income</div><div class="val">${money(manualIncome)}</div><div class="sub">Commissions etc.</div></div>
+    <div class="stat red"><div class="lbl">Total Expenses</div><div class="val">${money(totalExp)}</div><div class="sub">${expenses.length} entries</div></div>
+    <div class="stat ${net>=0?'green':'red'}"><div class="lbl">Net Business Income</div><div class="val">${money(net)}</div><div class="sub">Shop rev + income − expenses</div></div>
+  </div>
+
+  <div class="alert info mb">
+    <b>Formula:</b> Net Business Income = Shop Revenue + Other Income − Business Expenses.
+    Government fees collected for portals are excluded from shop profit.
+  </div>
+
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr))">
+    <div class="card">
+      <div class="section-title"><span class="bar"></span>Income Entries</div>
+      ${incomes.length ? incomes.slice().reverse().slice(0,12).map(i=>`<div class="kv">
+        <span class="k">${dt(i.date)} · ${esc(i.category)}<div class="tiny muted">${esc(i.description||'')}</div></span>
+        <span class="v">${money(i.amount)}<div class="tiny muted">${esc(i.method||'')}</div></span>
+      </div>`).join('') : '<div class="empty" style="padding:22px"><div class="e-ico">💵</div><p>No manual income entries.</p></div>'}
+    </div>
+    <div class="card">
+      <div class="section-title"><span class="bar"></span>Expense Entries</div>
+      ${expenses.length ? expenses.slice().reverse().slice(0,12).map(e=>`<div class="kv">
+        <span class="k">${dt(e.date)} · ${esc(e.category)}<div class="tiny muted">${esc(e.description||'')}</div></span>
+        <span class="v" style="color:var(--danger)">${money(e.amount)}<div class="tiny muted">${esc(e.method||'')}</div></span>
+      </div>`).join('') : '<div class="empty" style="padding:22px"><div class="e-ico">🧾</div><p>No expenses recorded.</p></div>'}
+    </div>
+  </div>
+
+  <div class="card mt">
+    <div class="section-title"><span class="bar"></span>Latest Transactions</div>
+    ${allTrans.length ? `<div class="table-wrap"><table>
+      <thead><tr><th>Date</th><th>Type</th><th>Details</th><th>Method</th><th class="num">Amount</th></tr></thead>
+      <tbody>${allTrans.map(t=>`<tr>
+        <td class="tiny">${dt(t.date)}</td>
+        <td><span class="badge ${t.type==='expense'?'red':t.type==='income'?'gold':'green'}">${t.type}</span></td>
+        <td><b class="tiny">${esc(t.label)}</b><div class="tiny muted">${esc(t.sub)}</div></td>
+        <td class="tiny">${esc(t.method||'—')}</td>
+        <td class="num" style="color:${t.amount<0?'var(--danger)':'inherit'}"><b>${money(t.amount)}</b></td>
+      </tr>`).join('')}</tbody></table></div>`
+      : '<div class="empty" style="padding:26px"><div class="e-ico">📊</div><p>No transactions recorded yet.</p></div>'}
+  </div>`;
+};
+
+/* -------------------- INVENTORY -------------------- */
+Views.inventory = function(){
+  const items = Store.db.inventory;
+  const low = items.filter(i=> Number(i.qty) <= Number(i.minQty||0));
+  const value = items.reduce((a,i)=> a + Number(i.qty||0)*Number(i.purchasePrice||0), 0);
+
+  return `
+  <div class="page-head">
+    <div>
+      <div class="page-title">📦 Inventory</div>
+      <div class="page-sub">Track paper, ink, lamination pouches, PVC cards and binding materials. Stock is never deducted automatically.</div>
+    </div>
+    <div class="page-actions"><button class="btn gold" data-act="addInventory">＋ Add Item</button></div>
+  </div>
+
+  <div class="grid stat-grid mb">
+    <div class="stat"><div class="lbl">Items Tracked</div><div class="val">${items.length}</div><div class="sub">Total SKUs</div></div>
+    <div class="stat gold"><div class="lbl">Stock Value</div><div class="val">${money(value)}</div><div class="sub">At purchase price</div></div>
+    <div class="stat ${low.length?'red':'green'}"><div class="lbl">Low Stock Alerts</div><div class="val">${low.length}</div><div class="sub">At or below minimum</div></div>
+  </div>
+
+  ${low.length ? `<div class="alert mb"><b>⚠ Low stock:</b> ${low.map(i=>esc(i.name)).join(', ')}</div>` : ''}
+
+  ${items.length ? `<div class="table-wrap"><table>
+    <thead><tr><th>Item</th><th>Category</th><th class="num">Qty</th><th>Unit</th><th class="num">Purchase ₹</th><th class="num">Min</th><th>Supplier</th><th></th></tr></thead>
+    <tbody>${items.map(i=>`<tr>
+      <td><b>${esc(i.name)}</b></td>
+      <td class="tiny">${esc(i.category||'—')}</td>
+      <td class="num" style="color:${Number(i.qty)<=Number(i.minQty||0)?'var(--danger)':'inherit'}"><b>${i.qty}</b></td>
+      <td class="tiny">${esc(i.unit||'pcs')}</td>
+      <td class="num">${money(i.purchasePrice)}</td>
+      <td class="num">${i.minQty||0}</td>
+      <td class="tiny">${esc(i.supplier||'—')}</td>
+      <td class="flex">
+        <button class="btn sm ghost" data-act="invAdjust" data-id="${i.id}" data-dir="1">＋</button>
+        <button class="btn sm ghost" data-act="invAdjust" data-id="${i.id}" data-dir="-1">－</button>
+        <button class="btn sm ghost" data-act="invEdit" data-id="${i.id}">✎</button>
+      </td>
+    </tr>`).join('')}</tbody></table></div>`
+    : `<div class="card"><div class="empty"><div class="e-ico">📦</div><h4>No inventory items</h4>
+       <p>Add A4 paper, ink, lamination pouches and other consumables to monitor stock levels.</p>
+       <button class="btn gold" data-act="addInventory">Add First Item</button></div></div>`}
+  `;
+};
+
+/* -------------------- REPORTS -------------------- */
+Views.reports = function(){
+  const from = state.reportFrom || (()=>{ const d=new Date(); d.setDate(1); return d.toISOString().slice(0,10); })();
+  const to = state.reportTo || todayISO();
+
+  const inRange = d => { const s=(d||'').slice(0,10); return s>=from && s<=to; };
+  const inv = Store.db.invoices.filter(i=>inRange(i.date));
+  const exp = Store.db.expenses.filter(e=>inRange(e.date));
+  const inc = Store.db.incomes.filter(i=>inRange(i.date));
+
+  const govTotal = inv.reduce((a,i)=>a+i.govTotal,0);
+  const shopTotal = inv.reduce((a,i)=>a+i.shopTotal+i.addlTotal-i.discount,0);
+  const printTotal = inv.filter(i=>i.isPrinting).reduce((a,i)=>a+i.shopTotal+i.addlTotal-i.discount,0);
+  const otherIncome = inc.reduce((a,i)=>a+Number(i.amount||0),0);
+  const expTotal = exp.reduce((a,e)=>a+Number(e.amount||0),0);
+  const net = shopTotal + otherIncome - expTotal;
+  const pending = inv.reduce((a,i)=>a+(i.total-i.paid),0);
+
+  // service performance
+  const svcMap = {};
+  inv.forEach(i=>(i.items||[]).forEach(it=>{
+    if(!svcMap[it.name]) svcMap[it.name] = {qty:0, rev:0};
+    svcMap[it.name].qty += it.qty;
+    svcMap[it.name].rev += (it.shop+it.addl)*it.qty;
+  }));
+  const perf = Object.entries(svcMap).sort((a,b)=>b[1].rev-a[1].rev).slice(0,10);
+
+  // daily series
+  const daily = {};
+  inv.forEach(i=>{ const d=(i.date||'').slice(0,10); daily[d]=(daily[d]||0)+i.shopTotal+i.addlTotal-i.discount; });
+  const dailyArr = Object.keys(daily).sort().map(d=>({label:d.slice(5), value:daily[d]}));
+
+  return `
+  <div class="page-head">
+    <div>
+      <div class="page-title">📈 Reports &amp; Analytics</div>
+      <div class="page-sub">All figures are calculated from your actual stored records — never from sample data.</div>
+    </div>
+    <div class="page-actions">
+      <button class="btn ghost" data-act="exportInvoices">⬇ Invoices CSV</button>
+      <button class="btn ghost" data-act="printReport">🖨 Print Report</button>
+    </div>
+  </div>
+
+  <div class="card mb">
+    <div class="row3">
+      <div class="field"><label>From Date</label><input type="date" id="repFrom" value="${from}"></div>
+      <div class="field"><label>To Date</label><input type="date" id="repTo" value="${to}"></div>
+      <div class="field"><label>&nbsp;</label><button class="btn block" data-act="applyReport">Apply Range</button></div>
+    </div>
+  </div>
+
+  <div class="grid stat-grid mb">
+    <div class="stat"><div class="lbl">Transactions</div><div class="val">${inv.length}</div><div class="sub">${dt(from)} → ${dt(to)}</div></div>
+    <div class="stat"><div class="lbl">Total Collection</div><div class="val">${money(govTotal+shopTotal)}</div><div class="sub">Incl. govt fees</div></div>
+    <div class="stat gold"><div class="lbl">Government Fees</div><div class="val">${money(govTotal)}</div><div class="sub">Pass-through</div></div>
+    <div class="stat green"><div class="lbl">Shop Revenue</div><div class="val">${money(shopTotal)}</div><div class="sub">Printing: ${money(printTotal)}</div></div>
+    <div class="stat red"><div class="lbl">Expenses</div><div class="val">${money(expTotal)}</div><div class="sub">${exp.length} entries</div></div>
+    <div class="stat ${net>=0?'green':'red'}"><div class="lbl">Net Income</div><div class="val">${money(net)}</div><div class="sub">Shop rev + income − exp</div></div>
+    <div class="stat"><div class="lbl">Pending Payments</div><div class="val">${money(pending)}</div><div class="sub">Unpaid balances</div></div>
+    <div class="stat"><div class="lbl">Avg. Bill Value</div><div class="val">${money(inv.length? (govTotal+shopTotal)/inv.length : 0)}</div><div class="sub">Per invoice</div></div>
+  </div>
+
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr))">
+    <div class="card">
+      <div class="section-title"><span class="bar"></span>Daily Shop Revenue</div>
+      <div class="chart-box"><canvas id="repChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="section-title"><span class="bar"></span>Service Performance (Top 10)</div>
+      ${perf.length ? perf.map(([n,v])=>`<div class="kv">
+        <span class="k tiny">${esc(n)}</span>
+        <span class="v">${v.qty}× · ${money(v.rev)}</span></div>`).join('')
+        : '<div class="empty" style="padding:22px"><p>No service data in this range.</p></div>'}
+    </div>
+  </div>
+
+  <div class="card mt">
+    <div class="section-title"><span class="bar"></span>Invoices in Range</div>
+    ${inv.length ? `<div class="table-wrap"><table>
+      <thead><tr><th>Invoice</th><th>Date</th><th>Customer</th><th class="num">Govt Fee</th><th class="num">Shop</th><th class="num">Total</th><th class="num">Paid</th><th>Status</th></tr></thead>
+      <tbody>${inv.slice().sort((a,b)=>(b.createdAt||'').localeCompare(a.createdAt||'')).map(i=>`<tr>
+        <td><b>${esc(i.no)}</b></td>
+        <td class="tiny">${dt(i.createdAt)}</td>
+        <td>${esc(i.customerName||'Walk-in')}</td>
+        <td class="num">${money(i.govTotal)}</td>
+        <td class="num">${money(i.shopTotal+i.addlTotal-i.discount)}</td>
+        <td class="num"><b>${money(i.total)}</b></td>
+        <td class="num">${money(i.paid)}</td>
+        <td><span class="badge ${i.status==='Paid'?'green':i.status==='Partial'?'gold':'red'}">${esc(i.status)}</span></td>
+      </tr>`).join('')}</tbody></table></div>`
+      : '<div class="empty" style="padding:26px"><div class="e-ico">📊</div><p>No invoices in this date range.</p></div>'}
+  </div>`;
+};
+Views.reports.after = function(){
+  const from = state.reportFrom || (()=>{ const d=new Date(); d.setDate(1); return d.toISOString().slice(0,10); })();
+  const to = state.reportTo || todayISO();
+  const inv = Store.db.invoices.filter(i=>{ const s=(i.date||'').slice(0,10); return s>=from && s<=to; });
+  const daily = {};
+  inv.forEach(i=>{ const d=(i.date||'').slice(0,10); daily[d]=(daily[d]||0)+i.shopTotal+i.addlTotal-i.discount; });
+  const arr = Object.keys(daily).sort().map(d=>({label:d.slice(5), value:daily[d]}));
+  Chart.bar($('#repChart'), arr.slice(-14));
+};
+
+/* -------------------- PRICE LIST -------------------- */
+Views.pricelist = function(){
+  const mode = state.params.mode || 'all';
+  const language = state.params.lang || 'both';
+  return `
+  <div class="page-head">
+    <div>
+      <div class="page-title">🏷️ Customer Price List</div>
+      <div class="page-sub">Generate a printable price list to display in your shop or share on WhatsApp.</div>
+    </div>
+    <div class="page-actions">
+      <button class="btn gold" data-act="printPriceList">🖨 Print / Save PDF</button>
+      <button class="btn ghost" data-act="copyPriceList">📋 Copy Text</button>
+      <button class="btn ghost" data-act="exportServices">⬇ CSV</button>
+    </div>
+  </div>
+
+  <div class="card mb">
+    <div class="row3">
+      <div class="field"><label>Services</label>
+        <select id="plMode">
+          <option value="all" ${mode==='all'?'selected':''}>All Services</option>
+          <option value="gov" ${mode==='gov'?'selected':''}>Government Services Only</option>
+          <option value="printing" ${mode==='printing'?'selected':''}>Printing Services Only</option>
+        </select>
+      </div>
+      <div class="field"><label>Language</label>
+        <select id="plLang">
+          <option value="both" ${language==='both'?'selected':''}>Bilingual (English + বাংলা)</option>
+          <option value="en" ${language==='en'?'selected':''}>English Only</option>
+          <option value="bn" ${language==='bn'?'selected':''}>বাংলা Only</option>
+        </select>
+      </div>
+      <div class="field"><label>&nbsp;</label><button class="btn block" data-act="applyPriceList">Update Preview</button></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div id="plPreview">${priceListHTML(mode, language)}</div>
+  </div>`;
+};
+
+function priceListHTML(mode, language){
+  let list = Services.active();
+  if(mode==='gov') list = list.filter(s=>['identity','ration','wb','health','edu','transport','business','banking','travel'].includes(s.cat));
+  if(mode==='printing') list = list.filter(s=>['printing','otherprint'].includes(s.cat));
+
+  const groups = {};
+  list.forEach(s=>{ (groups[s.cat]=groups[s.cat]||[]).push(s); });
+
+  return `
+  <div class="doc">
+    <div class="doc-head">
+      <div>
+        <div class="doc-brand">${esc(Store.db.settings.business.name)}</div>
+        <div class="doc-tag">CYBER CAFE • CSC SERVICES • XEROX • PRINTING • STUDIO</div>
+      </div>
+      <div class="doc-meta">
+        ${Store.db.settings.business.phone ? '📞 '+esc(Store.db.settings.business.phone)+'<br>' : ''}
+        ${Store.db.settings.business.address ? esc(Store.db.settings.business.address)+'<br>' : ''}
+        Price List · ${dt(todayISO())}
+      </div>
+    </div>
+    ${Object.keys(groups).map(cat=>`
+      <h4>${esc(CATEGORIES[cat].name)} — ${esc(CATEGORIES[cat].bn)}</h4>
+      <table>
+        <thead><tr>
+          <th style="width:34px">#</th>
+          <th>Service${language==='both'?' / পরিষেবা':''}</th>
+          <th style="width:110px">Govt Fee</th>
+          <th style="width:110px">Shop Charge</th>
+        </tr></thead>
+        <tbody>
+          ${groups[cat].map(s=>`<tr>
+            <td>${s.num}</td>
+            <td>
+              ${language!=='bn'?`<b>${esc(s.en)}</b>`:''}
+              ${language==='both'?`<div style="font-size:10.5px;color:#5c6d63">${esc(s.bn)}</div>`:''}
+              ${language==='bn'?`<b>${esc(s.bn)}</b>`:''}
+            </td>
+            <td>${esc(s.gov)}</td>
+            <td>${s.shopMin===s.shopMax?money(s.shopMin):money(s.shopMin)+' – '+money(s.shopMax)}<div style="font-size:9.5px;color:#7a8a80">${esc(s.unit)}</div></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    `).join('')}
+    <div class="doc-note">
+      <b>দাবিত্যাগ / Disclaimer:</b> সরকারি ফি সংশ্লিষ্ট সরকারি পোর্টাল অনুযায়ী প্রযোজ্য। দোকানের পরিষেবা ও প্রসেসিং চার্জ আলাদা।<br>
+      Government fees are as per the relevant official portal. Shop service &amp; processing charges are separate and are indicative business prices — not official CSC-approved tariffs.
+    </div>
+    <div class="doc-foot">
+      Made with ❤️ by Aliriyaj007 · ${CFG.devUrl}<br>
+      ${esc(Store.db.settings.business.name)} — Your Trusted Digital Service &amp; Printing Centre.
+    </div>
+  </div>`;
+}
+
+/* -------------------- SETTINGS -------------------- */
+Views.settings = function(){
+  const s = Store.db.settings;
+  return `
+  <div class="page-head">
+    <div>
+      <div class="page-title">⚙️ Settings</div>
+      <div class="page-sub">Business profile, invoice numbering, display preferences and data management.</div>
+    </div>
+  </div>
+
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(330px,1fr))">
+
+    <div class="card">
+      <div class="section-title"><span class="bar"></span>Business Profile</div>
+      <div class="field"><label>Business Name</label><input id="stName" value="${esc(s.business.name)}"></div>
+      <div class="field"><label>Address</label><textarea id="stAddr" rows="2">${esc(s.business.address)}</textarea></div>
+      <div class="row2">
+        <div class="field"><label>Mobile Number</label><input id="stPhone" value="${esc(s.business.phone)}"></div>
+        <div class="field"><label>Email</label><input id="stEmail" value="${esc(s.business.email)}"></div>
+      </div>
+      <div class="field"><label>Invoice Footer Note</label><textarea id="stFooter" rows="2">${esc(s.business.footer)}</textarea></div>
+      <button class="btn gold" data-act="saveBusiness">Save Business Profile</button>
+    </div>
+
+    <div class="card">
+      <div class="section-title"><span class="bar"></span>Invoice &amp; Pricing</div>
+      <div class="row2">
+        <div class="field"><label>Invoice Prefix</label><input id="stPrefix" value="${esc(s.invoice.prefix)}"></div>
+        <div class="field"><label>Next Invoice Number</label><input type="number" id="stNext" min="1" value="${s.invoice.next}"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Default Shop Charge ₹</label><input type="number" id="stShop" value="${s.defaults.shopCharge}"></div>
+        <div class="field"><label>Default Payment</label>
+          <select id="stPay">
+            ${['Cash','UPI','Bank Transfer','Card','Other'].map(p=>`<option ${s.defaults.payment===p?'selected':''}>${p}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <button class="btn gold" data-act="saveInvoiceSettings">Save Invoice Settings</button>
+    </div>
+
+    <div class="card">
+      <div class="section-title"><span class="bar"></span>Display</div>
+      <div class="field"><label>Theme</label>
+        <select id="stTheme">
+          <option value="light" ${s.theme==='light'?'selected':''}>Light Mode</option>
+          <option value="dark" ${s.theme==='dark'?'selected':''}>Dark Mode</option>
+        </select>
+      </div>
+      <div class="field"><label>Language</label>
+        <select id="stLang">
+          <option value="en" ${s.lang==='en'?'selected':''}>English</option>
+          <option value="bn" ${s.lang==='bn'?'selected':''}>বাংলা (Bengali)</option>
+        </select>
+      </div>
+      <button class="btn gold" data-act="saveDisplay">Save Display Settings</button>
+    </div>
+
+    <div class="card">
+      <div class="section-title"><span class="bar"></span>Data &amp; Backup</div>
+      <div class="alert info mb">
+        All data is stored locally in this browser. Clearing browser data will erase it — export regular backups.
+      </div>
+      <div class="flex">
+        <button class="btn" data-act="exportBackup">⬇ Export JSON Backup</button>
+        <button class="btn ghost" data-act="importBackup">⬆ Restore Backup</button>
+      </div>
+      <div class="divider"></div>
+      <div class="flex">
+        <button class="btn ghost" data-act="exportInvoices">⬇ Invoices CSV</button>
+        <button class="btn ghost" data-act="exportCustomers">⬇ Customers CSV</button>
+        <button class="btn ghost" data-act="exportServices">⬇ Services CSV</button>
+      </div>
+      <div class="divider"></div>
+      <div class="flex">
+        <button class="btn danger" data-act="resetApp">⚠ Reset Application</button>
+      </div>
+      <div class="hint">This permanently deletes all customers, invoices, applications, expenses and inventory from this browser.</div>
+    </div>
+
+  </div>
+
+  <div class="card mt">
+    <div class="section-title"><span class="bar"></span>Privacy &amp; Disclaimer</div>
+    <div class="alert mb">${esc(CFG.disclaimer)}</div>
+    <div class="tiny muted">
+      This application never asks for or stores OTPs, UPI PINs, ATM PINs, internet banking passwords, Aadhaar authentication secrets or biometric data.
+      Customer information is stored only in your browser and is never transmitted anywhere by this application.
+      <a href="#" data-act="go" data-route="about">Read the full privacy &amp; disclaimer →</a>
+    </div>
+  </div>`;
+};
+
+/* -------------------- USER GUIDE -------------------- */
+Views.guide = function(){
+  const sections = [
+    ['Understanding the Dashboard', 'The dashboard shows today\'s sales, service income, printing income, expenses and net profit. Every number is calculated live from your invoices and expense entries. Charts show your last 7 days of revenue, category distribution and today\'s payment methods.'],
+    ['Finding a Government Service', 'Open Service Catalogue, type "Aadhaar" or "আধার" in the search box, or pick a category chip. Each card shows the government fee, your shop charge and the estimated total. Click "Details" to see the full breakdown.'],
+    ['Editing Service Charges', 'Open the service details and click "Edit Price". You can change the government fee text, minimum/maximum shop charge and default charge. Changes apply to new bills only — old invoices always keep the price that was saved at the time of billing.'],
+    ['Adding a Customer', 'Click "+ Add Customer" in the top bar, or from Customer Management. Only a name is required. Mobile, village, post office, block, district and PIN are optional. Walk-in customers do not need to be registered.'],
+    ['Creating a New Bill', 'Click "New Bill". Choose a customer (or leave as Walk-in), search a service and add it to the bill. Adjust quantity, government fee, shop charge and additional charge if needed. Add a discount, choose the payment method, enter the amount received, then click "Generate Invoice".'],
+    ['Recording a Partial Payment', 'In the billing screen, enter an "Amount Received" lower than the total. The status automatically becomes "Partial" and the balance due is shown. The invoice records both values.'],
+    ['Generating & Printing an Invoice', 'After saving a bill, the invoice view opens. Click "Print / Save as PDF" to print or save as PDF using your browser\'s print dialog. You can reprint any past invoice from the Recent Invoices list.'],
+    ['Tracking a Government Application', 'Go to Application Tracking → "New Application". Enter the customer, service, reference number and follow-up date. Update the status as the application progresses. A submitted application is never automatically marked as approved.'],
+    ['Calculating Photocopy Charges', 'Open Printing & Xerox. In the Photocopy calculator, enter pages, copies and rate. Total = Pages × Copies × Rate. Click "Add to Bill" to push the line into your current bill.'],
+    ['Calculating Photo Printing Charges', 'In the Photo Printing calculator, choose the photo size, enter quantity and rate. Total = Quantity × Rate. "Passport Photo Set" uses a per-set rate.'],
+    ['Calculating Lamination Charges', 'Choose the lamination size (pocket card, Aadhaar, PAN, A4, legal, A3), enter quantity and rate, and add any cutting charge. Total = Quantity × Rate + Cutting.'],
+    ['Creating a Mixed Printing Order', 'Use the "Mixed Printing Order" panel to add several items (e.g. 20 B/W pages + 5 colour pages + 2 laminations + 1 binding). Click "Send to Billing" to create one bill with all items.'],
+    ['Recording Income', 'Use Finance → "+ Income" for commissions or income that is not tied to an invoice (for example AEPS commission or a DMT commission).'],
+    ['Recording Expenses', 'Use Finance → "+ Expense" for paper, ink, electricity, rent, transport and so on. Expenses reduce your net business income.'],
+    ['Managing Stock', 'Inventory → "+ Add Item" to create a stock item. Use ＋ / － to adjust quantity. A low-stock alert appears when quantity reaches the minimum level.'],
+    ['Viewing Reports', 'Reports & Analytics lets you pick a date range and see total collection, government fees, shop revenue, expenses and net income, along with your top services.'],
+    ['Exporting Data', 'Settings → Data & Backup lets you export a full JSON backup and CSV files for invoices, customers and services.'],
+    ['Restoring a Backup', 'Settings → "Restore Backup", then choose your previously exported JSON file. You will be asked to confirm before existing data is replaced.'],
+    ['Changing Language & Theme', 'Use the "ব" and 🌙 buttons in the top bar, or Settings → Display. Your choice is remembered after a refresh.'],
+    ['সহায়ক নির্দেশিকা (বাংলা)', 'যেকোনো সরকারি পরিষেবা খুঁজতে সার্ভিস ক্যাটালগে বাংলা বা ইংরেজি নাম লিখুন। "Add to Bill" চাপলে পরিষেবাটি সরাসরি বিলে যোগ হবে। সরকারি ফি ও দোকানের চার্জ আলাদাভাবে দেখানো হয়। বিল শেষে "Generate Invoice" চাপুন এবং প্রিন্ট করুন। সব তথ্য আপনার ব্রাউজারেই সংরক্ষিত থাকে — তাই নিয়মিত ব্যাকআপ নিন।']
+  ];
+  return `
+  <div class="page-head">
+    <div>
+      <div class="page-title">📖 User Guide</div>
+      <div class="page-sub">Practical, step-by-step instructions for daily shop operations.</div>
+    </div>
+  </div>
+  <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr))">
+    ${sections.map(([h,b],i)=>`<div class="card">
+      <div class="section-title"><span class="bar"></span>${i+1}. ${esc(h)}</div>
+      <div class="tiny" style="line-height:1.75;color:var(--text2)">${esc(b)}</div>
+    </div>`).join('')}
+  </div>`;
+};
+
+/* -------------------- ABOUT / PRIVACY -------------------- */
+Views.about = function(){
+  return `
+  <div class="page-head">
+    <div>
+      <div class="page-title">ℹ️ About, Privacy &amp; Disclaimer</div>
+      <div class="page-sub">${esc(CFG.business)} — Cyber Cafe &amp; CSC Service Manager</div>
+    </div>
+  </div>
+
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(330px,1fr))">
+    <div class="card">
+      <div class="section-title"><span class="bar"></span>Application</div>
+      <div class="kv"><span class="k">Business</span><span class="v">${esc(Store.db.settings.business.name)}</span></div>
+      <div class="kv"><span class="k">Application</span><span class="v">Cyber Cafe &amp; CSC Service Manager</span></div>
+      <div class="kv"><span class="k">Subtitle</span><span class="v">Complete Digital Service, CSC, Printing &amp; Billing Management System</span></div>
+      <div class="kv"><span class="k">Currency</span><span class="v">Indian Rupee (₹)</span></div>
+      <div class="kv"><span class="k">Languages</span><span class="v">English &amp; বাংলা</span></div>
+      <div class="kv"><span class="k">Services in catalogue</span><span class="v">${Services.list().length}</span></div>
+      <div class="kv"><span class="k">Developer</span><span class="v"><a href="${CFG.devUrl}" target="_blank" rel="noopener">Aliriyaj007</a></span></div>
+    </div>
+
+    <div class="card">
+      <div class="section-title"><span class="bar"></span>Privacy Policy</div>
+      <div class="tiny" style="line-height:1.8;color:var(--text2)">
+        This application runs entirely inside your browser. All business data — customers, invoices, applications, expenses and inventory —
+        is stored in this browser's local storage on your own device.<br><br>
+        <b>No data is sent to any server.</b> There is no backend, no analytics and no external API.<br><br>
+        Clearing your browser data, uninstalling the browser or resetting the application will permanently delete your records.
+        Please export a JSON backup regularly.<br><br>
+        <b>Do not store</b> OTPs, UPI PINs, ATM PINs, internet banking passwords, Aadhaar authentication secrets, biometric data or
+        unnecessary sensitive identity information in this application.
+      </div>
+    </div>
+
+    <div class="card" style="grid-column:1/-1">
+      <div class="section-title"><span class="bar"></span>Government Service Disclaimer</div>
+      <div class="alert danger mb">${esc(CFG.disclaimer)}</div>
+      <div class="tiny" style="line-height:1.9;color:var(--text2)">
+        • Government fees, eligibility rules, application procedures and portal availability may change at any time.
+          Always verify the latest information on the relevant official portal before accepting payment or submitting an application.<br>
+        • Shop service charges shown in this application are <b>indicative business prices</b> set by the operator.
+          They are <b>not</b> official government-approved CSC tariffs.<br>
+        • Where a government fee is marked as “Actual”, “Portal Fee”, “Ticket Fare”, “Bank Fee” or similar, the final amount
+          must be confirmed on the relevant official portal at the time of the transaction.<br>
+        • This application does not claim that every listed service is available through every CSC account,
+          that the operator is authorised to perform restricted services, that a submitted application will be approved,
+          or that a displayed estimate is the final official fee.<br>
+        • A shop invoice is a record of services rendered by the shop. It is <b>not</b> an official government receipt.
+      </div>
+    </div>
+
+    <div class="card" style="grid-column:1/-1">
+      <div class="section-title"><span class="bar"></span>Service Availability Marking</div>
+      <div class="tiny" style="line-height:1.9;color:var(--text2)">
+        Each service can be marked by the operator as:
+        <b>Available</b>, <b>Available with authorised credentials only</b>, <b>Referral / assistance only</b>,
+        <b>Temporarily unavailable</b> or <b>Not offered</b> — from the service details panel.
+        This helps keep the catalogue honest about what the shop can actually deliver today.
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt" style="text-align:center">
+    <div class="brand-logo" style="margin:0 auto 10px">RDS</div>
+    <div style="font-weight:900;font-size:16px;letter-spacing:.4px">${esc(Store.db.settings.business.name)}</div>
+    <div class="tiny muted" style="margin-top:4px">Your Trusted Digital Service &amp; Printing Centre.</div>
+    <div class="tiny" style="margin-top:12px">Made with ❤️ by <a href="${CFG.devUrl}" target="_blank" rel="noopener">Aliriyaj007</a></div>
+  </div>`;
+};
+
+/* ==========================================================================
+   9. RENDER
+   ========================================================================== */
+function renderView(){
+  const v = Views[state.route] || Views.dashboard;
+  const container = $('#view');
+  container.innerHTML = v();
+  if(v.after) { try{ v.after(); }catch(e){ console.error(e); } }
+
+  const titles = {
+    dashboard:['Dashboard','Business overview'],
+    catalogue:['Service Catalogue','All services'],
+    gov:['Government Services','CSC & e-District'],
+    printing:['Printing & Xerox','Calculators'],
+    photo:['Photo Studio','Photo printing'],
+    documents:['Document Processing','PDF & typing'],
+    customers:['Customers','Customer database'],
+    applications:['Application Tracking','Government applications'],
+    billing:['Billing & Invoices','POS'],
+    finance:['Income & Expenses','Financial records'],
+    inventory:['Inventory','Stock management'],
+    reports:['Reports','Analytics'],
+    pricelist:['Price List','Customer facing'],
+    settings:['Settings','Configuration'],
+    guide:['User Guide','How to use'],
+    about:['About','Privacy & disclaimer']
+  };
+  const tt = titles[state.route] || ['Dashboard',''];
+  $('#tbTitle').textContent = tt[0];
+  $('#tbSub').textContent = tt[1];
+  updateNotifDot();
+  renderNav();
+}
+
+/* ==========================================================================
+   10. BILLING ENGINE
+   ========================================================================== */
+function addServiceToCart(num, overrides){
+  const s = Services.get(num);
+  if(!s){ toast('Service not found','err'); return; }
+  const item = Object.assign({
+    num: s.num,
+    name: s.en,
+    bn: s.bn,
+    cat: s.cat,
+    unit: s.unit,
+    qty: 1,
+    gov: s.govNum,
+    shop: s.shopStd,
+    addl: 0
+  }, overrides||{});
+  state.cart.push(item);
+  toast('Added: ' + s.en, 'ok');
+}
+
+function saveBill(){
+  if(!state.cart.length){ toast('Add at least one service','err'); return; }
+  const db = Store.db;
+  const cust = state.billCustomer;
+  const govTotal = state.cart.reduce((a,i)=>a+i.gov*i.qty,0);
+  const shopTotal = state.cart.reduce((a,i)=>a+i.shop*i.qty,0);
+  const addlTotal = state.cart.reduce((a,i)=>a+i.addl*i.qty,0);
+  const discount = Number(state.billDiscount)||0;
+  const total = round2(govTotal + shopTotal + addlTotal - discount);
+
+  const payEl = $('#billPay');
+  const paidEl = $('#billPaid');
+  const payment = payEl ? payEl.value : 'Cash';
+  const paid = paidEl ? (Number(paidEl.value)||0) : total;
+
+  let status = 'Unpaid';
+  if(paid >= total - 0.001) status = 'Paid';
+  else if(paid > 0) status = 'Partial';
+
+  const prefix = db.settings.invoice.prefix || 'RDS';
+  const no = prefix + '-' + String(db.settings.invoice.next).padStart(4,'0');
+  db.settings.invoice.next = Number(db.settings.invoice.next) + 1;
+
+  const isPrinting = state.cart.every(i=>['printing','otherprint'].includes(i.cat));
+
+  const invoice = {
+    id: nid(),
+    no,
+    createdAt: nowISO(),
+    date: todayISO(),
+    customerId: cust ? cust.id : null,
+    customerName: cust ? cust.name : 'Walk-in Customer',
+    customerMobile: cust ? cust.mobile : '',
+    items: JSON.parse(JSON.stringify(state.cart)),
+    govTotal: round2(govTotal),
+    shopTotal: round2(shopTotal),
+    addlTotal: round2(addlTotal),
+    discount: round2(discount),
+    total,
+    paid: round2(paid),
+    payment,
+    status,
+    isPrinting,
+    notes: ''
+  };
+
+  db.invoices.push(invoice);
+  Store.save();
+
+  state.cart = [];
+  state.billDiscount = 0;
+  renderView();
+  showInvoice(invoice.id);
+  toast('Invoice ' + no + ' generated', 'ok');
+}
+
+function invoiceHTML(inv){
+  const b = Store.db.settings.business;
+  return `
+  <div class="doc">
+    <div class="doc-head">
+      <div>
+        <div class="doc-brand">${esc(b.name)}</div>
+        <div class="doc-tag">CYBER CAFE • CSC SERVICES • XEROX • PRINTING • STUDIO</div>
+      </div>
+      <div class="doc-meta">
+        ${b.address?esc(b.address)+'<br>':''}
+        ${b.phone?'📞 '+esc(b.phone)+'<br>':''}
+        ${b.email?esc(b.email)+'<br>':''}
+        <b>INVOICE</b>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;gap:20px;margin-top:14px;flex-wrap:wrap">
+      <div style="font-size:11.5px;line-height:1.7">
+        <b>Billed To</b><br>
+        ${esc(inv.customerName)}<br>
+        ${inv.customerMobile?'📞 '+esc(inv.customerMobile)+'<br>':''}
+      </div>
+      <div style="font-size:11.5px;line-height:1.7;text-align:right">
+        <b>Invoice No:</b> ${esc(inv.no)}<br>
+        <b>Date:</b> ${dtTime(inv.createdAt)}<br>
+        <b>Payment:</b> ${esc(inv.payment)}<br>
+        <b>Status:</b> ${esc(inv.status)}
+      </div>
+    </div>
+
+    <h4>Services</h4>
+    <table>
+      <thead><tr>
+        <th>#</th><th>Service</th><th style="text-align:right">Qty</th>
+        <th style="text-align:right">Govt Fee</th><th style="text-align:right">Shop</th>
+        <th style="text-align:right">Addl</th><th style="text-align:right">Amount</th>
+      </tr></thead>
+      <tbody>
+        ${inv.items.map((it,i)=>`<tr>
+          <td>${i+1}</td>
+          <td><b>${esc(it.name)}</b><div style="font-size:10px;color:#6c7d73">${esc(it.bn||'')}</div></td>
+          <td style="text-align:right">${it.qty}</td>
+          <td style="text-align:right">${money(it.gov*it.qty)}</td>
+          <td style="text-align:right">${money(it.shop*it.qty)}</td>
+          <td style="text-align:right">${money(it.addl*it.qty)}</td>
+          <td style="text-align:right"><b>${money((it.gov+it.shop+it.addl)*it.qty)}</b></td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+
+    <div style="margin-top:14px;max-width:320px;margin-left:auto">
+      <div class="tot-row"><span>Government Fees</span><span>${money(inv.govTotal)}</span></div>
+      <div class="tot-row"><span>Shop Service Charge</span><span>${money(inv.shopTotal)}</span></div>
+      <div class="tot-row"><span>Additional / Printing</span><span>${money(inv.addlTotal)}</span></div>
+      ${inv.discount?`<div class="tot-row"><span>Discount</span><span>− ${money(inv.discount)}</span></div>`:''}
+      <div class="tot-row grand"><span>Total Payable</span><span>${money(inv.total)}</span></div>
+      <div class="tot-row"><span>Amount Received</span><span>${money(inv.paid)}</span></div>
+      <div class="tot-row"><span>Balance Due</span><span>${money(Math.max(0,inv.total-inv.paid))}</span></div>
+    </div>
+
+    <div class="doc-note">
+      Government fees, where applicable, are collected as per the relevant official portal.
+      Shop facilitation charges are separate. This is a shop invoice and is <b>not</b> an official government receipt.
+    </div>
+
+    <div class="doc-foot">
+      ${esc(b.footer||'')}<br>
+      Made with ❤️ by Aliriyaj007 · ${CFG.devUrl}<br>
+      ${esc(b.name)} — Your Trusted Digital Service &amp; Printing Centre.
+    </div>
+  </div>`;
+}
+
+function showInvoice(id){
+  const inv = Store.db.invoices.find(i=>i.id===id);
+  if(!inv) return;
+  openModal('Invoice ' + inv.no,
+    `<div style="max-height:56vh;overflow:auto;background:#fff;padding:6px;border-radius:10px">${invoiceHTML(inv)}</div>`,
+    {
+      wide:true,
+      footer:`
+        <button class="btn ghost" data-act="closeModal">Close</button>
+        <button class="btn ghost" data-act="invoiceCopy" data-id="${inv.id}">📋 Copy</button>
+        <button class="btn" data-act="invoicePrint" data-id="${inv.id}">🖨 Print / PDF</button>
+        <button class="btn gold" data-act="invoicePayment" data-id="${inv.id}">💵 Record Payment</button>`
+    });
+}
+
+/* ==========================================================================
+   11. NOTIFICATIONS
+   ========================================================================== */
+function getNotifications(){
+  const out = [];
+  const db = Store.db;
+  const today = todayISO();
+
+  db.applications.forEach(a=>{
+    if(['Completed','Delivered','Cancelled','Rejected'].includes(a.status)) return;
+    if(a.followUpDate && a.followUpDate <= today){
+      out.push({id:'app-'+a.id, icon:'📋', text:`Follow-up due: ${a.customerName} — ${a.serviceName}`, route:'applications'});
+    }
+  });
+
+  db.invoices.forEach(i=>{
+    const due = i.total - i.paid;
+    if(due > 0.5){
+      out.push({id:'inv-'+i.id, icon:'💵', text:`Unpaid balance ${money(due)} on ${i.no} (${i.customerName})`, route:'billing'});
+    }
+  });
+
+  db.inventory.forEach(it=>{
+    if(Number(it.qty) <= Number(it.minQty||0)){
+      out.push({id:'inv-stock-'+it.id, icon:'📦', text:`Low stock: ${it.name} (${it.qty} ${it.unit||''})`, route:'inventory'});
+    }
+  });
+
+  const todayInv = db.invoices.filter(i=>(i.date||'').slice(0,10)===today);
+  if(todayInv.length){
+    out.push({id:'closing-'+today, icon:'🌙', text:`Daily closing reminder — ${todayInv.length} bill(s) recorded today.`, route:'reports'});
+  }
+  if(db.invoices.length && db.invoices.length % 20 === 0){
+    out.push({id:'backup-'+db.invoices.length, icon:'💾', text:'Backup reminder — export a JSON backup of your data.', route:'settings'});
+  }
+
+  return out.filter(n=> !db.dismissed.includes(n.id));
+}
+function updateNotifDot(){
+  const n = getNotifications();
+  const dot = $('#notifDot');
+  if(dot) dot.style.display = n.length ? 'block' : 'none';
+}
+function openNotifications(){
+  const list = getNotifications();
+  openModal('Notifications',
+    list.length ? `<div>${list.map(n=>`
+      <div class="flex" style="padding:9px 0;border-bottom:1px dashed var(--border)">
+        <span style="font-size:17px">${n.icon}</span>
+        <span class="tiny" style="flex:1">${esc(n.text)}</span>
+        <button class="btn sm ghost" data-act="notifDismiss" data-id="${n.id}">Dismiss</button>
+      </div>`).join('')}</div>`
+    : `<div class="empty"><div class="e-ico">✅</div><h4>All caught up</h4><p>No pending follow-ups, unpaid invoices or low-stock alerts.</p></div>`,
+    {footer:`<button class="btn ghost" data-act="closeModal">Close</button>`});
+}
+
+/* ==========================================================================
+   12. GLOBAL SEARCH
+   ========================================================================== */
+function openSearch(){
+  $('#searchOverlay').classList.add('open');
+  const inp = $('#gsInput');
+  inp.value=''; inp.focus();
+  $('#gsResults').innerHTML = '<div class="empty" style="padding:26px"><p class="tiny">Type to search across services, customers, invoices and applications.</p></div>';
+  inp.oninput = ()=> runGlobalSearch(inp.value);
+}
+function closeSearch(){ $('#searchOverlay').classList.remove('open'); }
+
+function runGlobalSearch(q){
+  q = q.trim().toLowerCase();
+  const box = $('#gsResults');
+  if(!q){ box.innerHTML=''; return; }
+  const out = [];
+
+  Services.all.filter(s=> s.en.toLowerCase().includes(q) || s.bn.includes(q) || String(s.num)===q)
+    .slice(0,8).forEach(s=> out.push({type:'Service', t:s.en, s:s.bn+' · #'+s.num, act:'svcDetail', num:s.num}));
+
+  Store.db.customers.filter(c=> (c.name||'').toLowerCase().includes(q) || (c.mobile||'').includes(q) || (c.bnName||'').includes(q))
+    .slice(0,6).forEach(c=> out.push({type:'Customer', t:c.name, s:c.mobile||c.village||'—', act:'custView', id:c.id}));
+
+  Store.db.invoices.filter(i=> (i.no||'').toLowerCase().includes(q) || (i.customerName||'').toLowerCase().includes(q))
+    .slice(0,6).forEach(i=> out.push({type:'Invoice', t:i.no+' — '+money(i.total), s:i.customerName+' · '+dt(i.createdAt), act:'invoiceView', id:i.id}));
+
+  Store.db.applications.filter(a=> (a.customerName||'').toLowerCase().includes(q) || (a.serviceName||'').toLowerCase().includes(q) || (a.id||'').toLowerCase().includes(q))
+    .slice(0,6).forEach(a=> out.push({type:'Application', t:a.customerName+' — '+a.serviceName, s:a.status+' · '+a.id, act:'appView', id:a.id}));
+
+  box.innerHTML = out.length ? out.map(o=>`
+    <div class="sr-item" data-act="${o.act}" ${o.num!==undefined?`data-num="${o.num}"`:''} ${o.id?`data-id="${o.id}"`:''}>
+      <div><div class="t">${esc(o.t)}</div><div class="s">${esc(o.s)}</div></div>
+      <span class="badge blue">${o.type}</span>
+    </div>`).join('')
+    : '<div class="empty" style="padding:26px"><p class="tiny">No results found.</p></div>';
+}
+
+/* ==========================================================================
+   13. CSV / BACKUP
+   ========================================================================== */
+function download(filename, content, mime){
+  const blob = new Blob([content], {type: mime||'text/plain;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click();
+  setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 400);
+}
+function toCSV(rows){
+  return rows.map(r=> r.map(c=>{
+    const s = String(c==null?'':c);
+    return /[",\n]/.test(s) ? '"'+s.replace(/"/g,'""')+'"' : s;
+  }).join(',')).join('\n');
+}
+function exportInvoicesCSV(){
+  const rows = [['Invoice','Date','Customer','Mobile','Govt Fee','Shop Charge','Additional','Discount','Total','Paid','Balance','Payment','Status']];
+  Store.db.invoices.forEach(i=> rows.push([i.no, dtTime(i.createdAt), i.customerName, i.customerMobile||'', i.govTotal, i.shopTotal, i.addlTotal, i.discount, i.total, i.paid, round2(i.total-i.paid), i.payment, i.status]));
+  if(rows.length===1){ toast('No invoices to export','err'); return; }
+  download('invoices_'+todayISO()+'.csv', toCSV(rows), 'text/csv;charset=utf-8');
+  toast('Invoices exported','ok');
+}
+function exportCustomersCSV(){
+  const rows = [['ID','Name','Bengali Name','Mobile','Alt Mobile','Village','Post Office','Block','District','PIN','Registered']];
+  Store.db.customers.forEach(c=> rows.push([c.id,c.name,c.bnName||'',c.mobile||'',c.altMobile||'',c.village||'',c.postOffice||'',c.block||'',c.district||'',c.pin||'',dt(c.createdAt)]));
+  if(rows.length===1){ toast('No customers to export','err'); return; }
+  download('customers_'+todayISO()+'.csv', toCSV(rows), 'text/csv;charset=utf-8');
+  toast('Customers exported','ok');
+}
+function exportServicesCSV(){
+  const rows = [['#','English Name','Bengali Name','Category','Govt Fee','Shop Min','Shop Max','Default Shop Charge','Unit','Status']];
+  Services.all.forEach(s=> rows.push([s.num, s.en, s.bn, CATEGORIES[s.cat].name, s.gov, s.shopMin, s.shopMax, s.shopStd, s.unit, s.active?'Active':'Inactive']));
+  download('services_'+todayISO()+'.csv', toCSV(rows), 'text/csv;charset=utf-8');
+  toast('Services exported','ok');
+}
+function exportBackup(){
+  download('rds_backup_'+todayISO()+'.json', JSON.stringify(Store.db, null, 2), 'application/json');
+  toast('Backup exported','ok');
+}
+function importBackup(){
+  const inp = document.createElement('input');
+  inp.type = 'file'; inp.accept = '.json,application/json';
+  inp.onchange = ()=>{
+    const f = inp.files[0]; if(!f) return;
+    const reader = new FileReader();
+    reader.onload = ()=>{
+      try {
+        const data = JSON.parse(reader.result);
+        if(!data || typeof data !== 'object' || !data.settings) throw new Error('Invalid backup file');
+        confirmDialog('This will REPLACE all current data in this browser with the backup contents. Continue?', ()=>{
+          Store.db = data;
+          const d = Store.defaults();
+          Store.db.settings = Object.assign({}, d.settings, Store.db.settings||{});
+          ['customers','applications','invoices','expenses','incomes','inventory','dismissed'].forEach(k=>{ if(!Array.isArray(Store.db[k])) Store.db[k]=[]; });
+          if(!Store.db.overrides) Store.db.overrides = {};
+          Store.save();
+          Services.build();
+          applyTheme(); 
+          toast('Backup restored','ok');
+          go('dashboard');
+        }, 'Restore Backup');
+      } catch(e){ toast('Invalid backup file','err'); }
+    };
+    reader.readAsText(f);
+  };
+  inp.click();
+}
+
+/* ==========================================================================
+   14. THEME & LANGUAGE
+   ========================================================================== */
+function applyTheme(){
+  document.documentElement.setAttribute('data-theme', Store.db.settings.theme || 'light');
+  const b = $('#themeBtn');
+  if(b) b.textContent = Store.db.settings.theme==='dark' ? '☀️' : '🌙';
+}
+function toggleTheme(){
+  Store.db.settings.theme = Store.db.settings.theme==='dark' ? 'light' : 'dark';
+  Store.save(); applyTheme(); renderView();
+}
+function toggleLang(){
+  Store.db.settings.lang = lang()==='en' ? 'bn' : 'en';
+  Store.save();
+  renderNav();
+  renderView();
+  toast(lang()==='bn' ? 'ভাষা: বাংলা' : 'Language: English','ok');
+}
+
+/* ==========================================================================
+   15. CUSTOMER / APPLICATION / INVENTORY / FINANCE ACTIONS
+   ========================================================================== */
+function customerForm(existing){
+  const c = existing || {};
+  formModal(existing?'Edit Customer':'Add Customer', [
+    {k:'name', label:'Full Name', req:true, ph:'e.g. Rahim Mondal'},
+    {k:'bnName', label:'Bengali Name (optional)', ph:'যেমন: রহিম মণ্ডল'},
+    {k:'mobile', label:'Mobile Number', ph:'10-digit mobile'},
+    {k:'altMobile', label:'Alternate Mobile'},
+    {k:'village', label:'Village'},
+    {k:'postOffice', label:'Post Office'},
+    {k:'block', label:'Block'},
+    {k:'district', label:'District', value:'West Bengal'},
+    {k:'pin', label:'PIN Code'},
+    {k:'notes', label:'Notes', type:'textarea', rows:2}
+  ], c, data=>{
+    if(existing){
+      Object.assign(existing, data);
+    } else {
+      const id = 'C' + String(Store.db.counters.customer).padStart(4,'0');
+      Store.db.counters.customer++;
+      Store.db.customers.push(Object.assign({id, createdAt: nowISO()}, data));
+    }
+    Store.save();
+    toast('Customer saved','ok');
+    renderView();
+  });
+}
+
+function applicationForm(existing){
+  const a = existing || {};
+  const svcOpts = Services.all.map(s=> ({v:s.num, l:'#'+s.num+' — '+s.en}));
+  formModal(existing?'Edit Application':'New Application', [
+    {k:'customerName', label:'Customer Name', req:true},
+    {k:'mobile', label:'Mobile Number'},
+    {k:'serviceNum', label:'Service', type:'select', options:svcOpts, value: a.serviceNum || 1},
+    {k:'refNo', label:'Application Reference Number'},
+    {k:'submittedDate', label:'Submission Date', type:'date', value: a.submittedDate || todayISO()},
+    {k:'followUpDate', label:'Expected Follow-up Date', type:'date', value: a.followUpDate || ''},
+    {k:'govFee', label:'Government Fee ₹', type:'number', step:'0.5', value: a.govFee!==undefined?a.govFee:0},
+    {k:'shopFee', label:'Shop Charge ₹', type:'number', step:'0.5', value: a.shopFee!==undefined?a.shopFee:50},
+    {k:'paid', label:'Amount Paid ₹', type:'number', step:'0.5', value: a.paid!==undefined?a.paid:0},
+    {k:'status', label:'Status', type:'select', options:APP_STATUS, value: a.status || 'New Request'},
+    {k:'notes', label:'Notes', type:'textarea', rows:2}
+  ], a, data=>{
+    const svc = Services.get(data.serviceNum);
+    const rec = {
+      customerName: data.customerName,
+      mobile: data.mobile,
+      serviceNum: Number(data.serviceNum),
+      serviceName: svc ? svc.en : '—',
+      refNo: data.refNo,
+      submittedDate: data.submittedDate,
+      followUpDate: data.followUpDate,
+      govFee: Number(data.govFee)||0,
+      shopFee: Number(data.shopFee)||0,
+      paid: Number(data.paid)||0,
+      status: data.status,
+      notes: data.notes
+    };
+    if(existing){
+      Object.assign(existing, rec);
+      if(['Completed','Delivered'].includes(rec.status) && !existing.completedAt) existing.completedAt = nowISO();
+    } else {
+      Store.db.applications.push(Object.assign({
+        id: 'A' + String(Store.db.counters.app).padStart(4,'0'),
+        createdAt: nowISO()
+      }, rec));
+      Store.db.counters.app++;
+    }
+    Store.save();
+    toast('Application saved','ok');
+    renderView();
+  }, {wide:true});
+}
+
+function viewApplication(id){
+  const a = Store.db.applications.find(x=>x.id===id);
+  if(!a) return;
+  const total = a.govFee + a.shopFee;
+  const due = total - a.paid;
+  openModal('Application ' + a.id, `
+    <div class="kv"><span class="k">Customer</span><span class="v">${esc(a.customerName)}</span></div>
+    <div class="kv"><span class="k">Mobile</span><span class="v">${esc(a.mobile||'—')}</span></div>
+    <div class="kv"><span class="k">Service</span><span class="v">${esc(a.serviceName)}</span></div>
+    <div class="kv"><span class="k">Reference No.</span><span class="v">${esc(a.refNo||'—')}</span></div>
+    <div class="kv"><span class="k">Submitted</span><span class="v">${a.submittedDate?dt(a.submittedDate):'—'}</span></div>
+    <div class="kv"><span class="k">Follow-up</span><span class="v">${a.followUpDate?dt(a.followUpDate):'—'}</span></div>
+    <div class="kv"><span class="k">Status</span><span class="v"><span class="badge ${STATUS_CLASS[a.status]||'grey'}">${esc(a.status)}</span></span></div>
+    <div class="divider"></div>
+    <div class="kv"><span class="k">Government Fee</span><span class="v">${money(a.govFee)}</span></div>
+    <div class="kv"><span class="k">Shop Charge</span><span class="v">${money(a.shopFee)}</span></div>
+    <div class="kv"><span class="k">Total</span><span class="v">${money(total)}</span></div>
+    <div class="kv"><span class="k">Paid</span><span class="v">${money(a.paid)}</span></div>
+    <div class="kv"><span class="k">Balance Due</span><span class="v" style="color:${due>0?'var(--danger)':'inherit'}">${money(due)}</span></div>
+    ${a.notes?`<div class="divider"></div><div class="tiny muted"><b>Notes:</b> ${esc(a.notes)}</div>`:''}
+    <div class="alert info mt tiny">A submitted application is not an approved application. Status must be updated only from official confirmation.</div>
+  `, {footer:`
+    <button class="btn ghost" data-act="closeModal">Close</button>
+    <button class="btn ghost" data-act="appEdit" data-id="${a.id}">✎ Edit</button>
+    <button class="btn" data-act="appReceipt" data-id="${a.id}">🖨 Receipt</button>
+    <button class="btn gold" data-act="appPay" data-id="${a.id}">💵 Add Payment</button>
+  `});
+}
+
+function viewCustomer(id){
+  const c = Store.db.customers.find(x=>x.id===id);
+  if(!c) return;
+  const inv = Store.db.invoices.filter(i=>i.customerId===c.id);
+  const apps = Store.db.applications.filter(a=>a.mobile && a.mobile===c.mobile);
+  const spent = inv.reduce((a,b)=>a+b.paid,0);
+  const due = inv.reduce((a,b)=>a+(b.total-b.paid),0);
+
+  openModal(c.name, `
+    <div class="kv"><span class="k">Customer ID</span><span class="v">${esc(c.id)}</span></div>
+    <div class="kv"><span class="k">Bengali Name</span><span class="v">${esc(c.bnName||'—')}</span></div>
+    <div class="kv"><span class="k">Mobile</span><span class="v">${esc(c.mobile||'—')}</span></div>
+    <div class="kv"><span class="k">Village / PO</span><span class="v">${esc((c.village||'—')+' / '+(c.postOffice||'—'))}</span></div>
+    <div class="kv"><span class="k">Block / District</span><span class="v">${esc((c.block||'—')+' / '+(c.district||'—'))}</span></div>
+    <div class="kv"><span class="k">PIN</span><span class="v">${esc(c.pin||'—')}</span></div>
+    <div class="kv"><span class="k">Registered</span><span class="v">${dt(c.createdAt)}</span></div>
+    <div class="divider"></div>
+    <div class="kv"><span class="k">Total Bills</span><span class="v">${inv.length}</span></div>
+    <div class="kv"><span class="k">Total Spent</span><span class="v">${money(spent)}</span></div>
+    <div class="kv"><span class="k">Pending Payment</span><span class="v" style="color:${due>0?'var(--danger)':'inherit'}">${money(due)}</span></div>
+    ${c.notes?`<div class="divider"></div><div class="tiny muted">${esc(c.notes)}</div>`:''}
+    <div class="divider"></div>
+    <div class="section-title"><span class="bar"></span>Recent Bills</div>
+    ${inv.length ? inv.slice(-6).reverse().map(i=>`<div class="kv"><span class="k">${esc(i.no)} · ${dt(i.createdAt)}</span><span class="v">${money(i.total)}</span></div>`).join('') : '<div class="tiny muted">No bills yet.</div>'}
+    ${apps.length?`<div class="divider"></div><div class="section-title"><span class="bar"></span>Applications</div>
+      ${apps.map(a=>`<div class="kv"><span class="k">${esc(a.serviceName)}</span><span class="v"><span class="badge ${STATUS_CLASS[a.status]||'grey'}">${esc(a.status)}</span></span></div>`).join('')}`:''}
+  `, {footer:`
+    <button class="btn ghost" data-act="closeModal">Close</button>
+    <button class="btn ghost" data-act="custEdit" data-id="${c.id}">✎ Edit</button>
+    <button class="btn gold" data-act="custBill" data-id="${c.id}">🧾 New Bill</button>
+  `});
+}
+
+/* ==========================================================================
+   16. EVENT DELEGATION
+   ========================================================================== */
+document.addEventListener('click', function(e){
+  const el = e.target.closest('[data-act]');
+  if(!el) return;
+  const act = el.dataset.act;
+
+  switch(act){
+
+  /* --- navigation --- */
+  case 'go':
+    go(el.dataset.route);
+    break;
+  case 'toggleSidebar':
+    $('#sidebar').classList.toggle('open');
+    break;
+  case 'toggleTheme': toggleTheme(); break;
+  case 'toggleLang': toggleLang(); break;
+  case 'closeModal': closeModal(); break;
+
+  /* --- search --- */
+  case 'openSearch': openSearch(); break;
+
+  /* --- quick actions --- */
+  case 'quickCustomer': customerForm(); break;
+  case 'newBill': state.cart = state.cart||[]; go('billing'); break;
+  case 'newApplication': applicationForm(); break;
+  case 'addExpense': expenseForm(); break;
+  case 'addIncome': incomeForm(); break;
+  case 'addInventory': inventoryForm(); break;
+
+  /* --- service catalogue --- */
+  case 'catFilter':
+    state.catalogueFilter = el.dataset.f;
+    renderView();
+    break;
+  case 'svcDetail': serviceDetail(Number(el.dataset.num)); break;
+  case 'svcAddBill':
+    addServiceToCart(Number(el.dataset.num));
+    go('billing');
+    break;
+
+  /* --- billing --- */
+  case 'billAddSvc':
+    addServiceToCart(Number(el.dataset.num));
+    renderView();
+    break;
+  case 'cartRemove':
+    state.cart.splice(Number(el.dataset.idx),1);
+    renderView();
+    break;
+  case 'clearCart':
+    confirmDialog('Clear the current bill draft?', ()=>{ state.cart=[]; state.billDiscount=0; renderView(); });
+    break;
+  case 'saveBill': saveBill(); break;
+  case 'invoiceView': showInvoice(el.dataset.id); break;
+  case 'invoicePrint': {
+    const inv = Store.db.invoices.find(i=>i.id===el.dataset.id);
+    if(inv) printDoc(invoiceHTML(inv));
+    break;
+  }
+  case 'invoiceCopy': {
+    const inv = Store.db.invoices.find(i=>i.id===el.dataset.id);
+    if(inv){
+      const txt = `INVOICE ${inv.no}\n${dtTime(inv.createdAt)}\nCustomer: ${inv.customerName}\n\n` +
+        inv.items.map(i=>`${i.name} × ${i.qty} = ${money((i.gov+i.shop+i.addl)*i.qty)}`).join('\n') +
+        `\n\nTotal: ${money(inv.total)}\nPaid: ${money(inv.paid)}\nStatus: ${inv.status}`;
+      navigator.clipboard?.writeText(txt).then(()=>toast('Copied to clipboard','ok')).catch(()=>toast('Copy failed','err'));
+    }
+    break;
+  }
+  case 'invoicePayment': {
+    const inv = Store.db.invoices.find(i=>i.id===el.dataset.id);
+    if(!inv) break;
+    const due = inv.total - inv.paid;
+    formModal('Record Payment — ' + inv.no, [
+      {k:'amount', label:'Amount Receiving ₹', type:'number', step:'0.5', value: round2(due), req:true},
+      {k:'method', label:'Payment Method', type:'select', options:['Cash','UPI','Bank Transfer','Card','Other'], value: inv.payment}
+    ], {}, data=>{
+      inv.paid = round2(inv.paid + Number(data.amount));
+      inv.payment = data.method;
+      inv.status = inv.paid >= inv.total - 0.001 ? 'Paid' : (inv.paid>0?'Partial':'Unpaid');
+      Store.save();
+      toast('Payment recorded','ok');
+      renderView();
+      showInvoice(inv.id);
+    });
+    break;
+  }
+
+  /* --- customers --- */
+  case 'custView': viewCustomer(el.dataset.id); break;
+  case 'custEdit': {
+    const c = Store.db.customers.find(x=>x.id===el.dataset.id);
+    if(c) customerForm(c);
+    break;
+  }
+  case 'custBill': {
+    const c = Store.db.customers.find(x=>x.id===el.dataset.id);
+    state.billCustomer = c || null;
+    go('billing');
+    break;
+  }
+
+  /* --- applications --- */
+  case 'appFilter':
+    state.params.status = el.dataset.f;
+    renderView();
+    break;
+  case 'appView': viewApplication(el.dataset.id); break;
+  case 'appEdit': {
+    const a = Store.db.applications.find(x=>x.id===el.dataset.id);
+    if(a) applicationForm(a);
+    break;
+  }
+  case 'appPay': {
+    const a = Store.db.applications.find(x=>x.id===el.dataset.id);
+    if(!a) break;
+    formModal('Add Payment — ' + a.id, [
+      {k:'amount', label:'Amount ₹', type:'number', step:'0.5', value: round2(Math.max(0,(a.govFee+a.shopFee)-a.paid)), req:true}
+    ], {}, d=>{
+      a.paid = round2(a.paid + Number(d.amount));
+      Store.save(); toast('Payment recorded','ok'); renderView(); viewApplication(a.id);
+    });
+    break;
+  }
+  case 'appReceipt': {
+    const a = Store.db.applications.find(x=>x.id===el.dataset.id);
+    if(a) printDoc(applicationReceiptHTML(a));
+    break;
+  }
+
+  /* --- finance --- */
+  case 'addExpense': expenseForm(); break;
+  case 'addIncome': incomeForm(); break;
+
+  /* --- inventory --- */
+  case 'addInventory': inventoryForm(); break;
+  case 'invEdit': {
+    const it = Store.db.inventory.find(x=>x.id===el.dataset.id);
+    if(it) inventoryForm(it);
+    break;
+  }
+  case 'invAdjust': {
+    const it = Store.db.inventory.find(x=>x.id===el.dataset.id);
+    if(!it) break;
+    const dir = Number(el.dataset.dir);
+    formModal((dir>0?'Add Stock':'Reduce Stock') + ' — ' + it.name, [
+      {k:'qty', label:'Quantity', type:'number', min:0.01, step:'0.01', value:1, req:true}
+    ], {}, d=>{
+      it.qty = round2(Number(it.qty) + dir*Number(d.qty));
+      if(it.qty < 0) it.qty = 0;
+      it.lastUpdate = nowISO();
+      Store.save(); toast('Stock updated','ok'); renderView();
+    });
+    break;
+  }
+
+  /* --- reports --- */
+  case 'applyReport': {
+    state.reportFrom = $('#repFrom').value;
+    state.reportTo = $('#repTo').value;
+    renderView();
+    break;
+  }
+  case 'printReport': {
+    printDoc(`<div class="doc"><div class="doc-head"><div>
+      <div class="doc-brand">${esc(Store.db.settings.business.name)}</div>
+      <div class="doc-tag">Business Report · ${dt(todayISO())}</div></div></div>
+      <p style="font-size:12px;margin-top:12px">Report generated from local records. Government fees are excluded from shop profit.</p>
+      </div>`);
+    break;
+  }
+  case 'exportInvoices': exportInvoicesCSV(); break;
+  case 'exportCustomers': exportCustomersCSV(); break;
+  case 'exportServices': exportServicesCSV(); break;
+
+  /* --- price list --- */
+  case 'applyPriceList': {
+    state.params.mode = $('#plMode').value;
+    state.params.lang = $('#plLang').value;
+    $('#plPreview').innerHTML = priceListHTML(state.params.mode, state.params.lang);
+    break;
+  }
+  case 'printPriceList': {
+    printDoc(priceListHTML(state.params.mode||'all', state.params.lang||'both'));
+    break;
+  }
+  case 'copyPriceList': {
+    let list = Services.active();
+    const txt = CFG.business + '\nCYBER CAFE • CSC • XEROX • PRINTING • STUDIO\n\n' +
+      list.map(s=>`#${s.num} ${s.en} / ${s.bn}\n   Govt Fee: ${s.gov} | Shop: ${s.shopMin===s.shopMax?money(s.shopMin):money(s.shopMin)+'–'+money(s.shopMax)} (${s.unit})`).join('\n') +
+      '\n\nসরকারি ফি সংশ্লিষ্ট সরকারি পোর্টাল অনুযায়ী প্রযোজ্য। দোকানের পরিষেবা ও প্রসেসিং চার্জ আলাদা।';
+    navigator.clipboard?.writeText(txt).then(()=>toast('Price list copied','ok')).catch(()=>toast('Copy failed','err'));
+    break;
+  }
+
+  /* --- settings --- */
+  case 'saveBusiness': {
+    const s = Store.db.settings.business;
+    s.name = $('#stName').value || s.name;
+    s.address = $('#stAddr').value;
+    s.phone = $('#stPhone').value;
+    s.email = $('#stEmail').value;
+    s.footer = $('#stFooter').value;
+    Store.save(); toast('Business profile saved','ok'); renderView();
+    break;
+  }
+  case 'saveInvoiceSettings': {
+    const s = Store.db.settings;
+    s.invoice.prefix = $('#stPrefix').value || 'RDS';
+    s.invoice.next = Math.max(1, Number($('#stNext').value)||1);
+    s.defaults.shopCharge = Number($('#stShop').value)||30;
+    s.defaults.payment = $('#stPay').value;
+    Store.save(); toast('Invoice settings saved','ok'); renderView();
+    break;
+  }
+  case 'saveDisplay': {
+    Store.db.settings.theme = $('#stTheme').value;
+    Store.db.settings.lang = $('#stLang').value;
+    Store.save(); applyTheme(); renderView(); toast('Display settings saved','ok');
+    break;
+  }
+  case 'exportBackup': exportBackup(); break;
+  case 'importBackup': importBackup(); break;
+  case 'resetApp':
+    confirmDialog('This will permanently DELETE all customers, invoices, applications, expenses and inventory from this browser. Export a backup first if unsure. Continue?', ()=>{
+      Store.reset(); Services.build(); applyTheme(); go('dashboard'); toast('Application reset','ok');
+    }, 'Delete Everything');
+    break;
+
+  /* --- notifications --- */
+  case 'openNotifications': openNotifications(); break;
+  case 'notifDismiss': {
+    Store.db.dismissed.push(el.dataset.id);
+    Store.save();
+    openNotifications();
+    updateNotifDot();
+    break;
+  }
+
+  /* --- printing calculators --- */
+  case 'pcAdd': {
+    const rate = Number($('#pcRate').value)||2;
+    const pages = Number($('#pcPages').value)||1;
+    const copies = Number($('#pcCopies').value)||1;
+    addServiceToCart(100, {
+      name: $('#pcType').selectedOptions[0].text.split('(')[0].trim(),
+      qty: pages*copies,
+      gov: 0, shop: rate, addl: 0, unit:'per page'
+    });
+    go('billing');
+    break;
+  }
+  case 'phAdd': {
+    const sel = $('#phSize');
+    const rate = Number($('#phRate').value)||20;
+    const qty = Number($('#phQty').value)||1;
+    addServiceToCart(116, {name: sel.value, qty, gov:0, shop: rate, addl:0, unit:'per print'});
+    go('billing');
+    break;
+  }
+  case 'lmAdd': {
+    const sel = $('#lmSize');
+    const rate = Number($('#lmRate').value)||25;
+    const qty = Number($('#lmQty').value)||1;
+    const cut = Number($('#lmCut').value)||0;
+    addServiceToCart(111, {name: sel.value, qty, gov:0, shop: rate, addl: cut, unit:'per unit'});
+    go('billing');
+    break;
+  }
+  case 'bdAdd': {
+    const sel = $('#bdType');
+    const rate = Number($('#bdRate').value)||40;
+    const qty = Number($('#bdQty').value)||1;
+    addServiceToCart(107, {name: sel.value, qty, gov:0, shop: rate, addl:0, unit:'per copy'});
+    go('billing');
+    break;
+  }
+  case 'mxAdd': {
+    const desc = $('#mxDesc').value.trim() || 'Printing item';
+    const qty = Number($('#mxQty').value)||1;
+    const rate = Number($('#mxRate').value)||0;
+    state.mixed = state.mixed || [];
+    state.mixed.push({desc, qty, rate});
+    renderMixedList();
+    break;
+  }
+  case 'mxToBill': {
+    if(!state.mixed || !state.mixed.length){ toast('Add at least one item','err'); break; }
+    state.mixed.forEach(m=>{
+      state.cart.push({
+        num: 0, name: m.desc, bn:'', cat:'printing', unit:'item',
+        qty: m.qty, gov:0, shop: m.rate, addl:0
+      });
+    });
+    state.mixed = [];
+    toast('Added to bill','ok');
+    go('billing');
+    break;
+  }
+  }
+});
+
+function renderMixedList(){
+  const box = $('#mxList');
+  if(!box) return;
+  const items = state.mixed || [];
+  const total = items.reduce((a,i)=>a+i.qty*i.rate,0);
+  $('#mxCount').textContent = items.length + ' items · ' + money(total);
+  box.innerHTML = items.length ? items.map((m,i)=>`
+    <div class="kv"><span class="k">${esc(m.desc)} × ${m.qty}</span>
+    <span class="v">${money(m.qty*m.rate)} <button class="btn sm ghost" onclick="void 0" data-act="mxDel" data-i="${i}">✕</button></span></div>`).join('')
+    : 'No items added yet.';
+  $$('[data-act="mxDel"]').forEach(b=> b.onclick = ()=>{
+    state.mixed.splice(Number(b.dataset.i),1); renderMixedList();
+  });
+}
+
+/* ---- live calculator updates ---- */
+document.addEventListener('input', function(e){
+  const id = e.target.id;
+  if(id==='pcPages'||id==='pcCopies'||id==='pcRate'){
+    const p=Number($('#pcPages').value)||0, c=Number($('#pcCopies').value)||0, r=Number($('#pcRate').value)||0;
+    const el=$('#pcTotal'); if(el) el.textContent = money(p*c*r);
+  }
+  if(id==='phQty'||id==='phRate'){
+    const q=Number($('#phQty').value)||0, r=Number($('#phRate').value)||0;
+    const el=$('#phTotal'); if(el) el.textContent = money(q*r);
+  }
+  if(id==='lmQty'||id==='lmRate'||id==='lmCut'){
+    const q=Number($('#lmQty').value)||0, r=Number($('#lmRate').value)||0, c=Number($('#lmCut').value)||0;
+    const el=$('#lmTotal'); if(el) el.textContent = money(q*r+c);
+  }
+  if(id==='bdQty'||id==='bdRate'){
+    const q=Number($('#bdQty').value)||0, r=Number($('#bdRate').value)||0;
+    const el=$('#bdTotal'); if(el) el.textContent = money(q*r);
+  }
+});
+document.addEventListener('change', function(e){
+  if(e.target.id==='pcType'){
+    const rate = Number(e.target.value)||2;
+    $('#pcRate').value = rate;
+    const p=Number($('#pcPages').value)||0, c=Number($('#pcCopies').value)||0;
+    $('#pcTotal').textContent = money(p*c*rate);
+  }
+  if(e.target.id==='phSize'){
+    const rate = Number(e.target.selectedOptions[0].dataset.rate)||20;
+    $('#phRate').value = rate;
+    const q=Number($('#phQty').value)||0;
+    $('#phTotal').textContent = money(q*rate);
+  }
+  if(e.target.id==='lmSize'){
+    const rate = Number(e.target.selectedOptions[0].dataset.rate)||25;
+    $('#lmRate').value = rate;
+    const q=Number($('#lmQty').value)||0, c=Number($('#lmCut').value)||0;
+    $('#lmTotal').textContent = money(q*rate+c);
+  }
+  if(e.target.id==='bdType'){
+    const rate = Number(e.target.selectedOptions[0].dataset.rate)||40;
+    $('#bdRate').value = rate;
+    const q=Number($('#bdQty').value)||0;
+    $('#bdTotal').textContent = money(q*rate);
+  }
+});
+
+/* ---- keyboard shortcuts ---- */
+document.addEventListener('keydown', function(e){
+  if(e.key==='/' && !/input|textarea|select/i.test(e.target.tagName)){
+    e.preventDefault(); openSearch();
+  }
+  if(e.key==='Escape'){ closeSearch(); closeModal(); }
+  if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='n'){
+    e.preventDefault(); go('billing');
+  }
+});
+$('#searchOverlay').addEventListener('click', e=>{ if(e.target.id==='searchOverlay') closeSearch(); });
+
+/* ==========================================================================
+   17. SERVICE DETAIL / EDIT / APPLICATIONS RECEIPT
+   ========================================================================== */
+function serviceDetail(num){
+  const s = Services.get(num);
+  if(!s) return;
+  const cat = CATEGORIES[s.cat];
+  const est = s.govNum + s.shopStd;
+  openModal('Service #' + s.num, `
+    <div class="cat" style="font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:#9a7c1e">${cat.icon} ${esc(cat.name)}</div>
+    <h2 style="font-size:17px;font-weight:800;margin:6px 0 2px">${esc(s.en)}</h2>
+    <div class="muted" style="margin-bottom:12px">${esc(s.bn)}</div>
+
+    <div class="kv"><span class="k">Official Government Fee</span><span class="v">${esc(s.gov)}</span></div>
+    <div class="kv"><span class="k">Shop Service Charge</span><span class="v">${s.shopMin===s.shopMax?money(s.shopMin):money(s.shopMin)+' – '+money(s.shopMax)}</span></div>
+    <div class="kv"><span class="k">Default Shop Charge</span><span class="v">${money(s.shopStd)}</span></div>
+    <div class="kv"><span class="k">Pricing Unit</span><span class="v">${esc(s.unit)}</span></div>
+    <div class="kv"><span class="k">Estimated Total</span><span class="v" style="color:var(--success);font-size:15px">${money(est)}</span></div>
+    <div class="kv"><span class="k">Availability</span><span class="v">${s.active?'<span class="badge green">Available</span>':'<span class="badge grey">Not offered</span>'}</span></div>
+    ${s.notes?`<div class="divider"></div><div class="tiny muted">${esc(s.notes)}</div>`:''}
+
+    <div class="alert info mt tiny">
+      <b>Pricing transparency:</b> Government fee is collected for the official portal and is not shop profit.
+      Shop charges are indicative business prices — not official CSC-approved tariffs.
+      ${s.govVar?'<br><b>This government fee is variable.</b> Confirm the actual amount on the official portal at billing time.':''}
+    </div>
+  `, {
+    footer:`
+      <button class="btn ghost" data-act="closeModal">Close</button>
+      <button class="btn ghost" data-act="svcEdit" data-num="${s.num}">✎ Edit Price</button>
+      <button class="btn gold" data-act="svcAddBill" data-num="${s.num}">＋ Add to Bill</button>
+    `
+  });
+  // attach edit handler
+  const btn = $('[data-act="svcEdit"]');
+  if(btn) btn.onclick = ()=> serviceEdit(s.num);
+}
+
+function serviceEdit(num){
+  const s = Services.get(num);
+  if(!s) return;
+  formModal('Edit Price — #' + s.num, [
+    {k:'gov', label:'Government Fee (display text)', value:s.gov, hint:'You can keep ₹0 – ₹50, "Portal Fee Actual", "Ticket Fare" etc.'},
+    {k:'shopMin', label:'Minimum Shop Charge ₹', type:'number', step:'0.5', value:s.shopMin},
+    {k:'shopMax', label:'Maximum Shop Charge ₹', type:'number', step:'0.5', value:s.shopMax},
+    {k:'shopStd', label:'Default Shop Charge ₹', type:'number', step:'0.5', value:s.shopStd},
+    {k:'unit', label:'Pricing Unit', value:s.unit},
+    {k:'active', label:'Availability', type:'select', options:[{v:'true',l:'Available'},{v:'false',l:'Not offered'}], value:String(s.active)},
+    {k:'notes', label:'Notes', type:'textarea', rows:2, value:s.notes||''}
+  ], {}, d=>{
+    Services.save(num, {
+      gov: d.gov,
+      shopMin: Number(d.shopMin)||0,
+      shopMax: Number(d.shopMax)||0,
+      shopStd: Number(d.shopStd)||0,
+      unit: d.unit,
+      active: d.active==='true',
+      notes: d.notes
+    });
+    toast('Price updated — old invoices unchanged','ok');
+    renderView();
+  }, {wide:true});
+}
+
+function applicationReceiptHTML(a){
+  const b = Store.db.settings.business;
+  return `<div class="doc">
+    <div class="doc-head">
+      <div><div class="doc-brand">${esc(b.name)}</div>
+        <div class="doc-tag">Application Receipt</div></div>
+      <div class="doc-meta">${b.phone?'📞 '+esc(b.phone)+'<br>':''}${dt(todayISO())}</div>
+    </div>
+    <h4>Application Details</h4>
+    <table>
+      <tbody>
+        <tr><td><b>Application ID</b></td><td>${esc(a.id)}</td><td><b>Status</b></td><td>${esc(a.status)}</td></tr>
+        <tr><td><b>Customer</b></td><td>${esc(a.customerName)}</td><td><b>Mobile</b></td><td>${esc(a.mobile||'—')}</td></tr>
+        <tr><td><b>Service</b></td><td colspan="3">${esc(a.serviceName)}</td></tr>
+        <tr><td><b>Reference No.</b></td><td>${esc(a.refNo||'—')}</td><td><b>Submitted</b></td><td>${a.submittedDate?dt(a.submittedDate):'—'}</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:14px;max-width:300px;margin-left:auto">
+      <div class="tot-row"><span>Government Fee</span><span>${money(a.govFee)}</span></div>
+      <div class="tot-row"><span>Shop Charge</span><span>${money(a.shopFee)}</span></div>
+      <div class="tot-row grand"><span>Total</span><span>${money(a.govFee+a.shopFee)}</span></div>
+      <div class="tot-row"><span>Paid</span><span>${money(a.paid)}</span></div>
+      <div class="tot-row"><span>Balance Due</span><span>${money(Math.max(0,a.govFee+a.shopFee-a.paid))}</span></div>
+    </div>
+    <div class="doc-note">
+      This is a shop receipt for facilitation services only. It is not an official government acknowledgement.
+      Application approval depends entirely on the concerned government department.
+    </div>
+    <div class="doc-foot">Made with ❤️ by Aliriyaj007 · ${CFG.devUrl}<br>${esc(b.name)}</div>
+  </div>`;
+}
+
+/* ==========================================================================
+   18. FORM BUILDERS FOR FINANCE / INVENTORY
+   ========================================================================== */
+const EXPENSE_CATS = ['Paper Purchase','Ink / Toner','Photo Paper','Lamination Pouches','PVC Cards','Spiral Binding Materials','Electricity','Internet','Equipment Maintenance','Shop Rent','Transportation','Packaging','Other Expenses'];
+const INCOME_CATS = ['Government Application Facilitation','Printing','Photocopy','Colour Printing','Photo Printing','Lamination','PVC Card Printing','Binding','Document Processing','Ticket Booking Commission','Money Transfer Commission','Other Services'];
+
+function expenseForm(){
+  formModal('Add Expense', [
+    {k:'date', label:'Date', type:'date', value: todayISO(), req:true},
+    {k:'category', label:'Category', type:'select', options:EXPENSE_CATS, req:true},
+    {k:'description', label:'Description', ph:'e.g. 2 reams A4 70 GSM'},
+    {k:'amount', label:'Amount ₹', type:'number', step:'0.5', req:true},
+    {k:'method', label:'Payment Method', type:'select', options:['Cash','UPI','Bank Transfer','Card','Other']},
+    {k:'supplier', label:'Supplier (optional)'},
+    {k:'notes', label:'Notes', type:'textarea', rows:2}
+  ], {}, d=>{
+    Store.db.expenses.push(Object.assign({id:nid(), createdAt:nowISO()}, d, {amount:Number(d.amount)||0}));
+    Store.save(); toast('Expense recorded','ok'); renderView();
+  });
+}
+function incomeForm(){
+  formModal('Add Income', [
+    {k:'date', label:'Date', type:'date', value: todayISO(), req:true},
+    {k:'category', label:'Category', type:'select', options:INCOME_CATS, req:true},
+    {k:'description', label:'Description'},
+    {k:'amount', label:'Amount ₹', type:'number', step:'0.5', req:true},
+    {k:'method', label:'Payment Method', type:'select', options:['Cash','UPI','Bank Transfer','Card','Other']},
+    {k:'notes', label:'Notes', type:'textarea', rows:2}
+  ], {}, d=>{
+    Store.db.incomes.push(Object.assign({id:nid(), createdAt:nowISO()}, d, {amount:Number(d.amount)||0}));
+    Store.save(); toast('Income recorded','ok'); renderView();
+  });
+}
+function inventoryForm(existing){
+  const it = existing || {};
+  formModal(existing?'Edit Inventory Item':'Add Inventory Item', [
+    {k:'name', label:'Item Name', req:true, value: it.name||''},
+    {k:'category', label:'Category', type:'select', options:['Paper','Printing Materials','Other Materials'], value: it.category||'Paper'},
+    {k:'qty', label:'Quantity', type:'number', step:'0.01', value: it.qty!==undefined?it.qty:0},
+    {k:'unit', label:'Unit', type:'select', options:['pcs','sheets','reams','packs','bottles','rolls','boxes'], value: it.unit||'pcs'},
+    {k:'purchasePrice', label:'Purchase Price ₹ / unit', type:'number', step:'0.5', value: it.purchasePrice!==undefined?it.purchasePrice:0},
+    {k:'minQty', label:'Minimum Stock Level', type:'number', step:'0.01', value: it.minQty!==undefined?it.minQty:0},
+    {k:'supplier', label:'Supplier', value: it.supplier||''}
+  ], it, d=>{
+    if(existing){
+      Object.assign(existing, d, {qty:Number(d.qty)||0, purchasePrice:Number(d.purchasePrice)||0, minQty:Number(d.minQty)||0});
+    } else {
+      Store.db.inventory.push(Object.assign({id:nid(), createdAt:nowISO()}, d,
+        {qty:Number(d.qty)||0, purchasePrice:Number(d.purchasePrice)||0, minQty:Number(d.minQty)||0}));
+    }
+    Store.save(); toast('Inventory saved','ok'); renderView();
+  });
+}
+
+/* ==========================================================================
+   19. INIT
+   ========================================================================== */
+function init(){
+  Store.load();
+  Services.build();
+  applyTheme();
+  renderNav();
+  renderView();
+
+  // seed some starter inventory categories if empty (only structure, no fake quantities)
+  if(Store.db.inventory.length===0 && !localStorage.getItem(CFG.storageKey+'_seeded')){
+    localStorage.setItem(CFG.storageKey+'_seeded','1');
+  }
+
+  // close sidebar on outside click (mobile)
+  document.addEventListener('click', e=>{
+    const sb = $('#sidebar');
+    if(sb.classList.contains('open') && !sb.contains(e.target) && !e.target.closest('[data-act="toggleSidebar"]')){
+      sb.classList.remove('open');
+    }
+  });
+
+  // global search overlay handlers
+  const gs = $('#gsInput');
+  if(gs){
+    gs.addEventListener('input', ()=> runGlobalSearch(gs.value));
+    gs.addEventListener('keydown', e=>{ if(e.key==='Escape') closeSearch(); });
+  }
+
+  console.log('%c RIYAJUL DIGITAL SOLUTIONS ', 'background:#123D2B;color:#D4AF37;font-weight:bold;padding:4px 8px;border-radius:4px',
+    'Cyber Cafe & CSC Service Manager ready. ' + Services.all.length + ' services loaded.');
+}
+
+window.addEventListener('DOMContentLoaded', init);
+if(document.readyState!=='loading') init();
+
+})();
+</script>
+</body>
+</html>
